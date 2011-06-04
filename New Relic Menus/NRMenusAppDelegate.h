@@ -7,12 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MainMenuController.h"
 
-@interface New_Relic_MenusAppDelegate : NSObject <NSApplicationDelegate> {
-@private
-    NSWindow *window;
+@interface NRMenusAppDelegate : NSObject {
+    MainMenuController *mainMenu;
 }
-
-@property (assign) IBOutlet NSWindow *window;
 
 @end

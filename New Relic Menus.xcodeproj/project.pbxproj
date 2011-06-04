@@ -11,12 +11,13 @@
 		EA438D6C139ACB9300B6F79E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA438D6A139ACB9300B6F79E /* InfoPlist.strings */; };
 		EA438D6F139ACB9300B6F79E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D6E139ACB9300B6F79E /* main.m */; };
 		EA438D72139ACB9300B6F79E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = EA438D70139ACB9300B6F79E /* Credits.rtf */; };
-		EA438D75139ACB9300B6F79E /* New_Relic_MenusAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D74139ACB9300B6F79E /* New_Relic_MenusAppDelegate.m */; };
-		EA438D78139ACB9300B6F79E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA438D76139ACB9300B6F79E /* MainMenu.xib */; };
+		EA438D75139ACB9300B6F79E /* NRMenusAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D74139ACB9300B6F79E /* NRMenusAppDelegate.m */; };
 		EA438D7F139ACB9300B6F79E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA438D61139ACB9300B6F79E /* Cocoa.framework */; };
 		EA438D87139ACB9300B6F79E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA438D85139ACB9300B6F79E /* InfoPlist.strings */; };
 		EA438D8A139ACB9300B6F79E /* New_Relic_MenusTests.h in Resources */ = {isa = PBXBuildFile; fileRef = EA438D89139ACB9300B6F79E /* New_Relic_MenusTests.h */; };
 		EA438D8C139ACB9300B6F79E /* New_Relic_MenusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D8B139ACB9300B6F79E /* New_Relic_MenusTests.m */; };
+		EA438D97139AD17B00B6F79E /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D96139AD17B00B6F79E /* MainMenuController.m */; };
+		EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */ = {isa = PBXBuildFile; fileRef = EA438D99139AD3B500B6F79E /* newrelic.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +36,22 @@
 		EA438D64139ACB9300B6F79E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		EA438D65139ACB9300B6F79E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EA438D66139ACB9300B6F79E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		EA438D69139ACB9300B6F79E /* New Relic Menus-Info.plist */ = {isa = PBXFileReference; path = "New Relic Menus-Info.plist"; sourceTree = "<group>"; };
+		EA438D69139ACB9300B6F79E /* New Relic Menus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "New Relic Menus-Info.plist"; sourceTree = "<group>"; };
 		EA438D6B139ACB9300B6F79E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EA438D6D139ACB9300B6F79E /* New Relic Menus-Prefix.pch */ = {isa = PBXFileReference; path = "New Relic Menus-Prefix.pch"; sourceTree = "<group>"; };
+		EA438D6D139ACB9300B6F79E /* New Relic Menus-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "New Relic Menus-Prefix.pch"; sourceTree = "<group>"; };
 		EA438D6E139ACB9300B6F79E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA438D71139ACB9300B6F79E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		EA438D73139ACB9300B6F79E /* New_Relic_MenusAppDelegate.h */ = {isa = PBXFileReference; path = New_Relic_MenusAppDelegate.h; sourceTree = "<group>"; };
-		EA438D74139ACB9300B6F79E /* New_Relic_MenusAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = New_Relic_MenusAppDelegate.m; sourceTree = "<group>"; };
-		EA438D77139ACB9300B6F79E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		EA438D73139ACB9300B6F79E /* NRMenusAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NRMenusAppDelegate.h; sourceTree = "<group>"; };
+		EA438D74139ACB9300B6F79E /* NRMenusAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NRMenusAppDelegate.m; sourceTree = "<group>"; };
 		EA438D7E139ACB9300B6F79E /* New Relic MenusTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "New Relic MenusTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA438D84139ACB9300B6F79E /* New Relic MenusTests-Info.plist */ = {isa = PBXFileReference; path = "New Relic MenusTests-Info.plist"; sourceTree = "<group>"; };
+		EA438D84139ACB9300B6F79E /* New Relic MenusTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "New Relic MenusTests-Info.plist"; sourceTree = "<group>"; };
 		EA438D86139ACB9300B6F79E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EA438D88139ACB9300B6F79E /* New Relic MenusTests-Prefix.pch */ = {isa = PBXFileReference; path = "New Relic MenusTests-Prefix.pch"; sourceTree = "<group>"; };
+		EA438D88139ACB9300B6F79E /* New Relic MenusTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "New Relic MenusTests-Prefix.pch"; sourceTree = "<group>"; };
 		EA438D89139ACB9300B6F79E /* New_Relic_MenusTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = New_Relic_MenusTests.h; sourceTree = "<group>"; };
 		EA438D8B139ACB9300B6F79E /* New_Relic_MenusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = New_Relic_MenusTests.m; sourceTree = "<group>"; };
+		EA438D95139AD17B00B6F79E /* MainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
+		EA438D96139AD17B00B6F79E /* MainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
+		EA438D99139AD3B500B6F79E /* newrelic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newrelic.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +115,12 @@
 		EA438D67139ACB9300B6F79E /* New Relic Menus */ = {
 			isa = PBXGroup;
 			children = (
-				EA438D73139ACB9300B6F79E /* New_Relic_MenusAppDelegate.h */,
-				EA438D74139ACB9300B6F79E /* New_Relic_MenusAppDelegate.m */,
-				EA438D76139ACB9300B6F79E /* MainMenu.xib */,
+				EA438D9B139AD65D00B6F79E /* lib */,
+				EA438D98139AD39500B6F79E /* Resources */,
+				EA438D73139ACB9300B6F79E /* NRMenusAppDelegate.h */,
+				EA438D74139ACB9300B6F79E /* NRMenusAppDelegate.m */,
+				EA438D95139AD17B00B6F79E /* MainMenuController.h */,
+				EA438D96139AD17B00B6F79E /* MainMenuController.m */,
 				EA438D68139ACB9300B6F79E /* Supporting Files */,
 			);
 			path = "New Relic Menus";
@@ -150,6 +156,21 @@
 				EA438D88139ACB9300B6F79E /* New Relic MenusTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA438D98139AD39500B6F79E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA438D99139AD3B500B6F79E /* newrelic.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA438D9B139AD65D00B6F79E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +242,7 @@
 			files = (
 				EA438D6C139ACB9300B6F79E /* InfoPlist.strings in Resources */,
 				EA438D72139ACB9300B6F79E /* Credits.rtf in Resources */,
-				EA438D78139ACB9300B6F79E /* MainMenu.xib in Resources */,
+				EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +279,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA438D6F139ACB9300B6F79E /* main.m in Sources */,
-				EA438D75139ACB9300B6F79E /* New_Relic_MenusAppDelegate.m in Sources */,
+				EA438D75139ACB9300B6F79E /* NRMenusAppDelegate.m in Sources */,
+				EA438D97139AD17B00B6F79E /* MainMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,14 +317,6 @@
 				EA438D71139ACB9300B6F79E /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		EA438D76139ACB9300B6F79E /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA438D77139ACB9300B6F79E /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		EA438D85139ACB9300B6F79E /* InfoPlist.strings */ = {
