@@ -15,6 +15,7 @@
     PreferencesController *preferences;
 }
 
+- (void)showMenuOrPreferences;
 - (BOOL)hasAPIKey;
 - (void)presentPreferencesWindow;
 

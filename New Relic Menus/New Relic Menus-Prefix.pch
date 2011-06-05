@@ -13,3 +13,5 @@
 #else
 #define DebugLog( s, ... )
 #endif
+
+#define RPM_URL [NSURL URLWithString:@"https://rpm.newrelic.com"]

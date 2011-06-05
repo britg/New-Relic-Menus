@@ -10,18 +10,33 @@
 
 
 @interface PreferencesController : NSWindowController {
+    
+    id appDelegate;
+    
     IBOutlet NSTextField *apiKeyField;
     IBOutlet NSButton *confirmButton;
     IBOutlet NSProgressIndicator *progressIndicator;
+    
+    IBOutlet NSMenu *hiddenMenu;
+    
+    NSString *currentAPIKey;
+    
 }
+
+@property (nonatomic, retain) id appDelegate;
 
 @property (nonatomic, retain) IBOutlet NSTextField *apiKeyField;
 @property (nonatomic, retain) IBOutlet NSButton *confirmButton;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
 
+@property (nonatomic, retain) IBOutlet NSMenu *hiddenMenu;
+
 - (IBAction)confirmButtonPressed:(id)sender;
 
 - (void)checkValidAPIKey:(NSString *)apiKey;
-- (void)apiKeyCheckDidReturn:(BOOL)valid;
+- (void)apiKeyCheckDidReturn:(NSNumber *)boolAsNumber;
+
+- (void)saveAPIKey:(NSString *)apiKey;
+- (void)notifyInvalidAPIKey;
 
 @end

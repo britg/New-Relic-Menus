@@ -12,7 +12,10 @@
 @implementation NRMenusAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
+    [self showMenuOrPreferences];
+}
+
+- (void)showMenuOrPreferences {
     // check for existence of new_relic_api_key
     if (![self hasAPIKey]) {
         // present a window asking for API Key
@@ -34,6 +37,7 @@
     if (!preferences) {
         DebugLog(@"Preferences doesn't exist. Creating!");
         preferences = [[PreferencesController alloc] init];
+        preferences.appDelegate = self;
     }
     
     [preferences showWindow:self];
