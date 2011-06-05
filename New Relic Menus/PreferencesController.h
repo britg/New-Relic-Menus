@@ -10,7 +10,18 @@
 
 
 @interface PreferencesController : NSWindowController {
-    
+    IBOutlet NSTextField *apiKeyField;
+    IBOutlet NSButton *confirmButton;
+    IBOutlet NSProgressIndicator *progressIndicator;
 }
+
+@property (nonatomic, retain) IBOutlet NSTextField *apiKeyField;
+@property (nonatomic, retain) IBOutlet NSButton *confirmButton;
+@property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
+
+- (IBAction)confirmButtonPressed:(id)sender;
+
+- (void)checkValidAPIKey:(NSString *)apiKey;
+- (void)apiKeyCheckDidReturn:(BOOL)valid;
 
 @end
