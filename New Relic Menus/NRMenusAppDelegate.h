@@ -19,4 +19,5 @@
 - (BOOL)hasAPIKey;
 - (void)presentPreferencesWindow;
 
+- (void)listenForNotifications;
 @end

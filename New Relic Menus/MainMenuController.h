@@ -11,12 +11,14 @@
 
 @interface MainMenuController : NSObject {
     NSStatusItem *mainStatusItem;
-    
+    NSMenu *menu;
 }
 
 - (void)addStatusItem;
-- (NSMenu *)createMainMenu;
+- (void)createMainMenu;
 
+- (void)refresh;
+- (void)notifyPreferencesAction;
 
 
 @end

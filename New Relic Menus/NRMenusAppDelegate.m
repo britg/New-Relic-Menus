@@ -13,6 +13,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self showMenuOrPreferences];
+    [self listenForNotifications];
 }
 
 - (void)showMenuOrPreferences {
@@ -23,8 +24,13 @@
         return;
     }
     
-    mainMenu = [[MainMenuController alloc] init];
-    [mainMenu addStatusItem];
+    if (!mainMenu) {
+        mainMenu = [[MainMenuController alloc] init];
+        [mainMenu addStatusItem];
+    } else {
+        [mainMenu refresh];
+    }
+    
 }
 
 - (BOOL)hasAPIKey {
@@ -37,10 +43,23 @@
     if (!preferences) {
         DebugLog(@"Preferences doesn't exist. Creating!");
         preferences = [[PreferencesController alloc] init];
-        preferences.appDelegate = self;
     }
     
     [preferences showWindow:self];
+}
+
+- (void)listenForNotifications {
+    // Show preferences window
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(presentPreferencesWindow) 
+                                                 name:@"preferences" 
+                                               object:nil];
+    
+    // api key added
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(showMenuOrPreferences) 
+                                                 name:@"api_key_added" 
+                                               object:nil];
 }
 
 @end

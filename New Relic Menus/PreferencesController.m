@@ -13,7 +13,6 @@
 
 @implementation PreferencesController
 
-@synthesize appDelegate;
 @synthesize apiKeyField;
 @synthesize confirmButton;
 @synthesize progressIndicator;
@@ -37,6 +36,7 @@
         [[self window] center];
     }
     [NSApp activateIgnoringOtherApps:YES];
+    [self.apiKeyField setStringValue:[self existingKey]];
     [[self window] setTitle:@"New Relic Preferences"];
     [[self window] makeKeyAndOrderFront:self];
 }
@@ -47,6 +47,12 @@
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     DebugLog(@"Window Did Load %@", self.window);
+}
+
+- (NSString *)existingKey {
+    return [NSString stringWithString:[AGKeychain getPasswordFromKeychainItem:kKeyString
+                                                                 withItemKind:kKeyString 
+                                                                  forUsername:kKeyString]];
 }
 
 #pragma mark - Actions
@@ -77,7 +83,8 @@
     if (valid) {
         [self saveAPIKey:currentAPIKey];
         [[self window] close];
-        [(NRMenusAppDelegate *)self.appDelegate showMenuOrPreferences];
+        [[NSNotificationCenter defaultCenter] 
+         postNotification:[NSNotification notificationWithName:@"api_key_added" object:nil]];
     } else {
         [self notifyInvalidAPIKey];
     }
