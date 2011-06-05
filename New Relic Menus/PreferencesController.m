@@ -6,20 +6,25 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "NRMenusAppDelegate.h"
 #import "PreferencesController.h"
-
+#import "APIHandler.h"
+#import "AGKeychain.h"
 
 @implementation PreferencesController
 
+@synthesize appDelegate;
 @synthesize apiKeyField;
 @synthesize confirmButton;
 @synthesize progressIndicator;
+@synthesize hiddenMenu;
 
 - (void)dealloc
 {
     [apiKeyField release];
     [confirmButton release];
     [progressIndicator release];
+    [hiddenMenu release];
     [super dealloc];
 }
 
@@ -28,6 +33,7 @@
     
     if (![self window]) {
         [NSBundle loadNibNamed:@"PreferencesWindow" owner:self];
+        [NSApp setMainMenu:[self hiddenMenu]];
         [[self window] center];
     }
     [NSApp activateIgnoringOtherApps:YES];
@@ -46,21 +52,47 @@
 #pragma mark - Actions
 
 - (IBAction)confirmButtonPressed:(id)sender {
-    DebugLog(@"Confirm button pressed");
+    DebugLog(@"Confirm button pressed with value %@", [self.apiKeyField stringValue]);
     
     // Use API to determine if this is a valid API Key
-    [self checkValidAPIKey:[self.apiKeyField value]];
+    [self checkValidAPIKey:[self.apiKeyField stringValue]];
     
 }
 
 #pragma mark - API Key Check
 
 - (void)checkValidAPIKey:(NSString *)apiKey {
+    currentAPIKey = apiKey;
+    
     [self.progressIndicator startAnimation:self];
+    [[APIHandler sharedInstance] checkAPIKey:apiKey delegate:self 
+                                    callback:@selector(apiKeyCheckDidReturn:)];
 }
 
-- (void)apiKeyCheckDidReturn:(BOOL)valid {
+- (void)apiKeyCheckDidReturn:(NSNumber *)boolAsNumber {
+    BOOL valid = [boolAsNumber boolValue];
+    DebugLog(@"api key check returned %@", (valid ? @"valid" : @"not valid"));
     [self.progressIndicator stopAnimation:self];
+    
+    if (valid) {
+        [self saveAPIKey:currentAPIKey];
+        [[self window] close];
+        [(NRMenusAppDelegate *)self.appDelegate showMenuOrPreferences];
+    } else {
+        [self notifyInvalidAPIKey];
+    }
+}
+
+- (void)saveAPIKey:(NSString *)apiKey {
+    if([AGKeychain checkForExistanceOfKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString]) {
+		[AGKeychain modifyKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString withNewPassword:apiKey];
+	} else {
+		[AGKeychain addKeychainItem:kKeyString	withItemKind:kKeyString forUsername:kKeyString withPassword:apiKey];
+	}
+}
+
+- (void)notifyInvalidAPIKey {
+    
 }
 
 @end
