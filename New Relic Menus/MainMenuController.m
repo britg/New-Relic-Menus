@@ -28,21 +28,33 @@
 }
 
 - (void)addStatusItem {
-    NSMenu *menu = [self createMainMenu];
+    [self createMainMenu];
+    [self refresh];
+}
+
+- (void)createMainMenu {
+    NSZone *menuZone = [NSMenu menuZone];
+	menu = [[NSMenu allocWithZone:menuZone] init];
+    
+    NSMenuItem *menuItem;
+    
+    menuItem = [menu addItemWithTitle:@"Preferences" action:@selector(notifyPreferencesAction) keyEquivalent:@"P"];
+    [menuItem setToolTip:@"Change your API Key"];
+    [menuItem setTarget:self];
+}
+
+- (void)refresh {
     [mainStatusItem setMenu:menu];
     [mainStatusItem setLength:100];
     [mainStatusItem setHighlightMode:YES];
     [mainStatusItem setTitle:@"Loading..."];
     [mainStatusItem setToolTip:@"New Relic Menus"];
     [mainStatusItem setImage:[NSImage imageNamed:@"newrelic"]];
-    
 }
 
-- (NSMenu *)createMainMenu {
-    NSZone *menuZone = [NSMenu menuZone];
-	NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
-    
-    return menu;
+- (void)notifyPreferencesAction {
+    [[NSNotificationCenter defaultCenter] 
+     postNotification:[NSNotification notificationWithName:@"preferences" object:nil]];
 }
 
 @end

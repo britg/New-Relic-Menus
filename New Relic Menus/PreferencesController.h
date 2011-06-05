@@ -11,8 +11,6 @@
 
 @interface PreferencesController : NSWindowController {
     
-    id appDelegate;
-    
     IBOutlet NSTextField *apiKeyField;
     IBOutlet NSButton *confirmButton;
     IBOutlet NSProgressIndicator *progressIndicator;
@@ -23,13 +21,13 @@
     
 }
 
-@property (nonatomic, retain) id appDelegate;
-
 @property (nonatomic, retain) IBOutlet NSTextField *apiKeyField;
 @property (nonatomic, retain) IBOutlet NSButton *confirmButton;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
 
 @property (nonatomic, retain) IBOutlet NSMenu *hiddenMenu;
+
+- (NSString *)existingKey;
 
 - (IBAction)confirmButtonPressed:(id)sender;
 
