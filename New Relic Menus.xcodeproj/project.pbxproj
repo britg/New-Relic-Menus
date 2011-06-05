@@ -18,6 +18,11 @@
 		EA438D8C139ACB9300B6F79E /* New_Relic_MenusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D8B139ACB9300B6F79E /* New_Relic_MenusTests.m */; };
 		EA438D97139AD17B00B6F79E /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D96139AD17B00B6F79E /* MainMenuController.m */; };
 		EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */ = {isa = PBXBuildFile; fileRef = EA438D99139AD3B500B6F79E /* newrelic.png */; };
+		EA438DA7139AD87A00B6F79E /* README in Resources */ = {isa = PBXBuildFile; fileRef = EA438DA6139AD87A00B6F79E /* README */; };
+		EA438DC7139AE68600B6F79E /* AGKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438DC6139AE68600B6F79E /* AGKeychain.m */; };
+		EA438DC9139AE6CC00B6F79E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA438DC8139AE6CC00B6F79E /* Security.framework */; };
+		EA438DCE139AF10400B6F79E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA438DCD139AF10400B6F79E /* PreferencesWindow.xib */; };
+		EA438DD4139AF13900B6F79E /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438DD3139AF13800B6F79E /* PreferencesController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +57,14 @@
 		EA438D95139AD17B00B6F79E /* MainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
 		EA438D96139AD17B00B6F79E /* MainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
 		EA438D99139AD3B500B6F79E /* newrelic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newrelic.png; sourceTree = "<group>"; };
+		EA438DA6139AD87A00B6F79E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		EA438DC5139AE68600B6F79E /* AGKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeychain.h; sourceTree = "<group>"; };
+		EA438DC6139AE68600B6F79E /* AGKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeychain.m; sourceTree = "<group>"; };
+		EA438DC8139AE6CC00B6F79E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EA438DCA139AE7AD00B6F79E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		EA438DCD139AF10400B6F79E /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
+		EA438DD2139AF13800B6F79E /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		EA438DD3139AF13800B6F79E /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA438DC9139AE6CC00B6F79E /* Security.framework in Frameworks */,
 				EA438D62139ACB9300B6F79E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +119,7 @@
 		EA438D63139ACB9300B6F79E /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA438DC8139AE6CC00B6F79E /* Security.framework */,
 				EA438D64139ACB9300B6F79E /* AppKit.framework */,
 				EA438D65139ACB9300B6F79E /* CoreData.framework */,
 				EA438D66139ACB9300B6F79E /* Foundation.framework */,
@@ -115,13 +130,17 @@
 		EA438D67139ACB9300B6F79E /* New Relic Menus */ = {
 			isa = PBXGroup;
 			children = (
+				EA438D68139ACB9300B6F79E /* Supporting Files */,
 				EA438D9B139AD65D00B6F79E /* lib */,
 				EA438D98139AD39500B6F79E /* Resources */,
 				EA438D73139ACB9300B6F79E /* NRMenusAppDelegate.h */,
 				EA438D74139ACB9300B6F79E /* NRMenusAppDelegate.m */,
 				EA438D95139AD17B00B6F79E /* MainMenuController.h */,
 				EA438D96139AD17B00B6F79E /* MainMenuController.m */,
-				EA438D68139ACB9300B6F79E /* Supporting Files */,
+				EA438DA6139AD87A00B6F79E /* README */,
+				EA438DCD139AF10400B6F79E /* PreferencesWindow.xib */,
+				EA438DD2139AF13800B6F79E /* PreferencesController.h */,
+				EA438DD3139AF13800B6F79E /* PreferencesController.m */,
 			);
 			path = "New Relic Menus";
 			sourceTree = "<group>";
@@ -132,6 +151,7 @@
 				EA438D69139ACB9300B6F79E /* New Relic Menus-Info.plist */,
 				EA438D6A139ACB9300B6F79E /* InfoPlist.strings */,
 				EA438D6D139ACB9300B6F79E /* New Relic Menus-Prefix.pch */,
+				EA438DCA139AE7AD00B6F79E /* Constants.h */,
 				EA438D6E139ACB9300B6F79E /* main.m */,
 				EA438D70139ACB9300B6F79E /* Credits.rtf */,
 			);
@@ -169,6 +189,8 @@
 		EA438D9B139AD65D00B6F79E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				EA438DC5139AE68600B6F79E /* AGKeychain.h */,
+				EA438DC6139AE68600B6F79E /* AGKeychain.m */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -243,6 +265,8 @@
 				EA438D6C139ACB9300B6F79E /* InfoPlist.strings in Resources */,
 				EA438D72139ACB9300B6F79E /* Credits.rtf in Resources */,
 				EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */,
+				EA438DA7139AD87A00B6F79E /* README in Resources */,
+				EA438DCE139AF10400B6F79E /* PreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +305,8 @@
 				EA438D6F139ACB9300B6F79E /* main.m in Sources */,
 				EA438D75139ACB9300B6F79E /* NRMenusAppDelegate.m in Sources */,
 				EA438D97139AD17B00B6F79E /* MainMenuController.m in Sources */,
+				EA438DC7139AE68600B6F79E /* AGKeychain.m in Sources */,
+				EA438DD4139AF13900B6F79E /* PreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

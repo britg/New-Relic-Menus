@@ -7,12 +7,36 @@
 //
 
 #import "NRMenusAppDelegate.h"
+#import "AGKeychain.h"
 
 @implementation NRMenusAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    // check for existence of new_relic_api_key
+    if (![self hasAPIKey]) {
+        // present a window asking for API Key
+        [self presentPreferencesWindow];
+        return;
+    }
+    
     mainMenu = [[MainMenuController alloc] init];
     [mainMenu addStatusItem];
+}
+
+- (BOOL)hasAPIKey {
+    return [AGKeychain checkForExistanceOfKeychainItem:kKeyString 
+                                          withItemKind:kKeyString 
+                                           forUsername:kKeyString];
+}
+
+- (void)presentPreferencesWindow {
+    if (!preferences) {
+        DebugLog(@"Preferences doesn't exist. Creating!");
+        preferences = [[PreferencesController alloc] init];
+    }
+    
+    [preferences showWindow:self];
 }
 
 @end

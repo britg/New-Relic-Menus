@@ -8,9 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MainMenuController.h"
+#import "PreferencesController.h"
 
 @interface NRMenusAppDelegate : NSObject {
     MainMenuController *mainMenu;
+    PreferencesController *preferences;
 }
+
+- (BOOL)hasAPIKey;
+- (void)presentPreferencesWindow;
 
 @end
