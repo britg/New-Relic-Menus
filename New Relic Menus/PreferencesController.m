@@ -13,6 +13,7 @@
 
 @implementation PreferencesController
 
+@synthesize apiKeyLabel;
 @synthesize apiKeyField;
 @synthesize confirmButton;
 @synthesize progressIndicator;
@@ -91,6 +92,9 @@
 }
 
 - (void)saveAPIKey:(NSString *)apiKey {
+    [self.apiKeyLabel setStringValue:@"Enter your New Relic API Key"];
+    [self.apiKeyLabel setTextColor:[NSColor blackColor]];
+    
     if([AGKeychain checkForExistanceOfKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString]) {
 		[AGKeychain modifyKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString withNewPassword:apiKey];
 	} else {
@@ -99,7 +103,8 @@
 }
 
 - (void)notifyInvalidAPIKey {
-    
+    [self.apiKeyLabel setStringValue:@"The API Key you entered is invalid. Please try again."];
+    [self.apiKeyLabel setTextColor:[NSColor redColor]];
 }
 
 @end

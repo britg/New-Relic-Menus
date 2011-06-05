@@ -11,6 +11,7 @@
 
 @interface PreferencesController : NSWindowController {
     
+    IBOutlet NSTextField *apiKeyLabel;
     IBOutlet NSTextField *apiKeyField;
     IBOutlet NSButton *confirmButton;
     IBOutlet NSProgressIndicator *progressIndicator;
@@ -21,6 +22,7 @@
     
 }
 
+@property (nonatomic, retain) IBOutlet NSTextField *apiKeyLabel;
 @property (nonatomic, retain) IBOutlet NSTextField *apiKeyField;
 @property (nonatomic, retain) IBOutlet NSButton *confirmButton;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
