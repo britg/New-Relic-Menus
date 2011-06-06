@@ -20,5 +20,7 @@
 - (void)refresh;
 - (void)notifyPreferencesAction;
 
+- (void)getPrimaryMetrics;
+
 
 @end

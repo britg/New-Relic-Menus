@@ -52,13 +52,13 @@
     // Show preferences window
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(presentPreferencesWindow) 
-                                                 name:@"preferences" 
+                                                 name:SHOW_PREFERENCES 
                                                object:nil];
     
     // api key added
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(showMenuOrPreferences) 
-                                                 name:@"api_key_added" 
+                                                 name:API_KEY_VALIDATED
                                                object:nil];
 }
 

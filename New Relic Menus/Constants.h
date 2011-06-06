@@ -7,3 +7,7 @@
 //
 
 #define kKeyString @"rpm_key"
+
+// Notifications
+#define SHOW_PREFERENCES @"show_preferences"
+#define API_KEY_VALIDATED @"api_key_validated"

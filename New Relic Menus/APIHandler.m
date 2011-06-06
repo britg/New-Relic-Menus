@@ -12,6 +12,8 @@
 
 @implementation APIHandler
 
+@synthesize currentAPIKey;
+
 SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
 - (void)dealloc
@@ -20,6 +22,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 }
 
 #pragma mark - Check API Key
+
 - (void)checkAPIKey:(NSString *)apiKey delegate:(id)delegate
                                        callback:(SEL)callback {
     
@@ -44,6 +47,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     }];
     
     [request startAsynchronous];
+}
+
+#pragma mark - Account & Application
+
+- (void)getPrimaryAccount {
+    
+}
+
+- (void)getPrimaryApplication {
+    
+}
+
+#pragma mark - Metrics
+
+- (void)getPrimaryMetrics {
+    
 }
 
 @end
