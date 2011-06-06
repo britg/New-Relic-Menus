@@ -10,11 +10,22 @@
 
 
 @interface APIHandler : NSObject {
+    int primaryAccountId;
+    int primaryApplicationId;
     
+    NSString *currentAPIKey;
 }
+
+@property (nonatomic, retain) NSString *currentAPIKey;
+
 + (APIHandler *)sharedInstance;
 
 - (void)checkAPIKey:(NSString *)apikey delegate:(id)delegate
                                        callback:(SEL)callback;
+
+- (void)getPrimaryAccount;
+- (void)getPrimaryApplication;
+
+- (void)getPrimaryMetrics;
 
 @end

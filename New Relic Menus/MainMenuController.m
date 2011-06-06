@@ -43,6 +43,14 @@
     [menuItem setTarget:self];
 }
 
+
+- (void)notifyPreferencesAction {
+    [[NSNotificationCenter defaultCenter] 
+     postNotification:[NSNotification notificationWithName:SHOW_PREFERENCES object:nil]];
+}
+
+#pragma mark - Main Status Item
+
 - (void)refresh {
     [mainStatusItem setMenu:menu];
     [mainStatusItem setLength:100];
@@ -50,11 +58,11 @@
     [mainStatusItem setTitle:@"Loading..."];
     [mainStatusItem setToolTip:@"New Relic Menus"];
     [mainStatusItem setImage:[NSImage imageNamed:@"newrelic"]];
+    [self getPrimaryMetrics];
 }
 
-- (void)notifyPreferencesAction {
-    [[NSNotificationCenter defaultCenter] 
-     postNotification:[NSNotification notificationWithName:@"preferences" object:nil]];
+- (void)getPrimaryMetrics {
+    
 }
 
 @end
