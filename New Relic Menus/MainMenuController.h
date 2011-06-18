@@ -12,16 +12,13 @@
 @interface MainMenuController : NSObject {
     NSStatusItem *mainStatusItem;
     NSMenu *menu;
+    NSTimer *timer;
 }
 
 - (void)listenForNotifications;
 
 - (void)addStatusItem;
 - (void)createMainMenu;
-
-- (void)refresh;
-- (void)openNewRelicDashboard;
-- (void)notifyPreferencesAction;
 - (void)ensureValidAPIKey;
 
 // States
@@ -29,7 +26,11 @@
 - (void)setStateLoading;
 
 // Actions
-
+- (void)coldStart;
+- (void)refresh;
+- (void)beginTimer;
+- (void)openNewRelicDashboard;
+- (void)notifyPreferencesAction;
 - (void)getPrimaryMetrics;
 
 

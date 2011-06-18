@@ -30,7 +30,7 @@
 
 - (void)addStatusItem {
     [self createMainMenu];
-    [self refresh];
+    [self coldStart];
 }
 
 - (void)createMainMenu {
@@ -67,11 +67,6 @@
 
 #pragma mark - States
 
-- (void)refresh {
-    [self setStateLoading];
-    [self ensureValidAPIKey];
-}
-
 - (void)ensureValidAPIKey {
     [[APIHandler sharedInstance] getPrimaryAccount];
 }
@@ -92,6 +87,24 @@
 }
 
 #pragma mark - Actions
+
+- (void)coldStart {
+    [self setStateLoading];
+    [self ensureValidAPIKey];
+    [self beginTimer];
+}
+
+- (void)refresh {
+    [self getPrimaryMetrics];
+}
+
+- (void)beginTimer {
+    timer = [NSTimer scheduledTimerWithTimeInterval: 60
+											 target: self
+										   selector: @selector(refresh)
+										   userInfo: nil
+											repeats: YES];
+}
 
 - (void)openNewRelicDashboard {
     [[NSWorkspace sharedWorkspace] openURL:[[APIHandler sharedInstance] dashboardURL]];
