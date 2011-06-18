@@ -1,0 +1,17 @@
+https://github.com/newrelic/newrelic_api
+
+Header:
+x-license-key: 83968f4500fed97de841528891ec83f9912f6d1e
+x-api-key: 117ca11ec49a4bcef0957a862c5ae51d9a2169d912f6d1e
+
+// get accounts
+https://rpm.newrelic.com/accounts.xml
+
+// get applications
+https://rpm.newrelic.com/accounts/23087/applications.xml
+
+// high level metrics
+https://rpm.newrelic.com/accounts/23087/applications/81042/threshold_values.xml
+
+// Application status html
+https://rpm.newrelic.com/application_dashboard

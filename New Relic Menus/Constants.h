@@ -22,3 +22,5 @@
 #define METRICS_FAILED_NOTIFICATION @"metrics_failed"
 
 #define STATS_VIEW_CLICKED_NOTIFICATION @"stats_view_clicked"
+
+#define QUIT_NOTIFICATION @"quit"

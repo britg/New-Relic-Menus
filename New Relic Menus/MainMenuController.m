@@ -52,11 +52,15 @@
     NSMenuItem *menuItem;
     
     menuItem = [menu addItemWithTitle:@"New Relic Dashboard" action:@selector(openNewRelicDashboard) keyEquivalent:@"O"];
-    [menuItem setToolTip:@"Change your API Key"];
+    [menuItem setToolTip:@"Open Your New Relic Dashboard"];
     [menuItem setTarget:self];
     
     menuItem = [menu addItemWithTitle:@"Preferences" action:@selector(notifyPreferencesAction) keyEquivalent:@"P"];
     [menuItem setToolTip:@"Change your API Key"];
+    [menuItem setTarget:self];
+    
+    menuItem = [menu addItemWithTitle:@"Quit" action:@selector(notifyQuit) keyEquivalent:@"Q"];
+    [menuItem setToolTip:@"Quit New Relic Menus"];
     [menuItem setTarget:self];
     
     [mainStatusItem setMenu:menu];
@@ -196,6 +200,10 @@
 - (void)notifyPreferencesAction {
     [[NSNotificationCenter defaultCenter] 
      postNotification:[NSNotification notificationWithName:SHOW_PREFERENCES_NOTIFICATION object:nil]];
+}
+
+- (void)notifyQuit {
+    [NSApp terminate:nil];
 }
 
 - (void)getPrimaryMetrics {
