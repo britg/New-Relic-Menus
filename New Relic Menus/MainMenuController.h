@@ -20,6 +20,7 @@
 - (void)createMainMenu;
 
 - (void)refresh;
+- (void)openNewRelicDashboard;
 - (void)notifyPreferencesAction;
 - (void)ensureValidAPIKey;
 

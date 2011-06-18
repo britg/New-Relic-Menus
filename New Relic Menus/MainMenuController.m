@@ -39,6 +39,10 @@
     
     NSMenuItem *menuItem;
     
+    menuItem = [menu addItemWithTitle:@"New Relic Dashboard" action:@selector(openNewRelicDashboard) keyEquivalent:@"O"];
+    [menuItem setToolTip:@"Change your API Key"];
+    [menuItem setTarget:self];
+    
     menuItem = [menu addItemWithTitle:@"Preferences" action:@selector(notifyPreferencesAction) keyEquivalent:@"P"];
     [menuItem setToolTip:@"Change your API Key"];
     [menuItem setTarget:self];
@@ -88,6 +92,10 @@
 }
 
 #pragma mark - Actions
+
+- (void)openNewRelicDashboard {
+    [[NSWorkspace sharedWorkspace] openURL:[[APIHandler sharedInstance] dashboardURL]];
+}
 
 - (void)notifyPreferencesAction {
     [[NSNotificationCenter defaultCenter] 
