@@ -37,6 +37,8 @@
 - (void)checkAPIKey:(NSString *)apikey delegate:(id)delegate
                                        callback:(SEL)callback;
 
+- (NSURL *)dashboardURL;
+
 - (void)getPrimaryAccount;
 - (void)parsePrimaryAccount:(NSData *)data;
 - (void)getPrimaryApplication;

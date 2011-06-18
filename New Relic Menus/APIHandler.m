@@ -77,6 +77,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
 #pragma mark - Account & Application
 
+- (NSURL *)dashboardURL {
+    NSString *url = [NSString stringWithFormat:@"%@/accounts/%i/applications/%i", 
+                     RPM_DOMAIN, primaryAccountId, primaryApplicationId];
+    return [NSURL URLWithString:url];
+}
+
 - (void)getPrimaryAccount {
     
     NSString *accountsPath = [NSString stringWithFormat:@"/accounts.xml"];
