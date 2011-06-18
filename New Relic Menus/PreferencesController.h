@@ -29,8 +29,6 @@
 
 @property (nonatomic, retain) IBOutlet NSMenu *hiddenMenu;
 
-- (NSString *)existingKey;
-
 - (IBAction)confirmButtonPressed:(id)sender;
 
 - (void)checkValidAPIKey:(NSString *)apiKey;

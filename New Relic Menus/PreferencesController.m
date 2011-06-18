@@ -37,7 +37,7 @@
         [[self window] center];
     }
     [NSApp activateIgnoringOtherApps:YES];
-    [self.apiKeyField setStringValue:[self existingKey]];
+    [self.apiKeyField setStringValue:[[APIHandler sharedInstance] storedAPIKey]];
     [[self window] setTitle:@"New Relic Preferences"];
     [[self window] makeKeyAndOrderFront:self];
 }
@@ -48,12 +48,6 @@
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     DebugLog(@"Window Did Load %@", self.window);
-}
-
-- (NSString *)existingKey {
-    return [NSString stringWithString:[AGKeychain getPasswordFromKeychainItem:kKeyString
-                                                                 withItemKind:kKeyString 
-                                                                  forUsername:kKeyString]];
 }
 
 #pragma mark - Actions
@@ -94,12 +88,7 @@
 - (void)saveAPIKey:(NSString *)apiKey {
     [self.apiKeyLabel setStringValue:@"Enter your New Relic API Key"];
     [self.apiKeyLabel setTextColor:[NSColor blackColor]];
-    
-    if([AGKeychain checkForExistanceOfKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString]) {
-		[AGKeychain modifyKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString withNewPassword:apiKey];
-	} else {
-		[AGKeychain addKeychainItem:kKeyString	withItemKind:kKeyString forUsername:kKeyString withPassword:apiKey];
-	}
+    [[APIHandler sharedInstance] saveAPIKey:apiKey];
 }
 
 - (void)notifyInvalidAPIKey {

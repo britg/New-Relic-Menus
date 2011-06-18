@@ -14,17 +14,22 @@
     NSMenu *menu;
 }
 
+- (void)listenForNotifications;
+
 - (void)addStatusItem;
 - (void)createMainMenu;
 
 - (void)refresh;
 - (void)notifyPreferencesAction;
-
-- (void)getPrimaryMetrics;
+- (void)ensureValidAPIKey;
 
 // States
 
 - (void)setStateLoading;
+
+// Actions
+
+- (void)getPrimaryMetrics;
 
 
 @end
