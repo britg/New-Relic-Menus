@@ -20,3 +20,5 @@
 
 #define METRICS_OBTAINED_NOTIFICATION @"metrics_obtained"
 #define METRICS_FAILED_NOTIFICATION @"metrics_failed"
+
+#define STATS_VIEW_CLICKED_NOTIFICATION @"stats_view_clicked"
