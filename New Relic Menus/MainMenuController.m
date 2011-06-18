@@ -7,7 +7,7 @@
 //
 
 #import "MainMenuController.h"
-
+#import "APIHandler.h"
 
 @implementation MainMenuController
 
@@ -16,7 +16,8 @@
     self = [super init];
     if (self) {
         mainStatusItem = [[[NSStatusBar systemStatusBar] 
-                           statusItemWithLength:NSSquareStatusItemLength] retain];    
+                           statusItemWithLength:NSVariableStatusItemLength] retain];
+        [self listenForNotifications];
     }
     
     return self;
@@ -48,16 +49,42 @@
     [mainStatusItem setImage:[NSImage imageNamed:@"newrelic"]];
 }
 
+- (void)listenForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(statsUpdated) 
+                                                 name:METRICS_OBTAINED_NOTIFICATION
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(getPrimaryMetrics) 
+                                                 name:APPLICATION_OBTAINED_NOTIFICATION
+                                               object:nil];
+}
+
 #pragma mark - States
 
 - (void)refresh {
     [self setStateLoading];
-    [self getPrimaryMetrics];
+    [self ensureValidAPIKey];
+}
+
+- (void)ensureValidAPIKey {
+    [[APIHandler sharedInstance] getPrimaryAccount];
 }
 
 - (void)setStateLoading {
-    [mainStatusItem setLength:100];
+    //[mainStatusItem setLength:100];
     [mainStatusItem setTitle:@"Loading..."];
+}
+
+- (void)statsUpdated {
+    DebugLog(@"Status updated!");
+    [mainStatusItem setTitle:[NSString stringWithFormat:@"%.00frpm %.0fms %.02ferr %.01fapdex", 
+                              [[[APIHandler sharedInstance] throughput] floatValue],
+                              [[[APIHandler sharedInstance] responseTime] floatValue],
+                              [[[APIHandler sharedInstance] errorPercent] floatValue],
+                              [[[APIHandler sharedInstance] apdex] floatValue]
+                              ]];
 }
 
 #pragma mark - Actions
@@ -68,7 +95,8 @@
 }
 
 - (void)getPrimaryMetrics {
-    
+    DebugLog(@"Fetching primary metrics");
+    [[APIHandler sharedInstance] getPrimaryMetrics];
 }
 
 @end

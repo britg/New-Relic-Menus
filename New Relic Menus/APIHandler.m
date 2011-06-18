@@ -9,10 +9,16 @@
 #import "APIHandler.h"
 #import "SynthesizeSingleton.h"
 #import "ASIHTTPRequest.h"
+#import "AGKeychain.h"
 
 @implementation APIHandler
 
 @synthesize currentAPIKey;
+@synthesize apdex;
+@synthesize errorPercent;
+@synthesize throughput;
+@synthesize cpu;
+@synthesize responseTime;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
@@ -21,7 +27,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     [super dealloc];
 }
 
-#pragma mark - Check API Key
+#pragma mark - API Key
+
+- (void)saveAPIKey:(NSString *)apiKey {
+    if([AGKeychain checkForExistanceOfKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString]) {
+		[AGKeychain modifyKeychainItem:kKeyString withItemKind:kKeyString forUsername:kKeyString withNewPassword:apiKey];
+	} else {
+		[AGKeychain addKeychainItem:kKeyString	withItemKind:kKeyString forUsername:kKeyString withPassword:apiKey];
+	}
+    currentAPIKey = apiKey;
+}
+
+- (NSString *)storedAPIKey {
+    return currentAPIKey = [NSString stringWithString:[AGKeychain getPasswordFromKeychainItem:kKeyString
+                                                                 withItemKind:kKeyString 
+                                                                  forUsername:kKeyString]];
+}
 
 - (void)checkAPIKey:(NSString *)apiKey delegate:(id)delegate
                                        callback:(SEL)callback {
@@ -34,13 +55,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:checkAPIURL];
     [request setDelegate:self];
     [request addRequestHeader:@"x-api-key" value:apiKey];
+    
     [request setCompletionBlock:^{
         int status = [request responseStatusCode];
 
         BOOL valid = (status == 200);
         if ([delegate respondsToSelector:callback])
             [delegate performSelector:callback withObject:[NSNumber numberWithBool:valid]];
+        
+        NSData *responseData = [request responseData];
+        [self parsePrimaryAccount:responseData];
     }];
+    
     [request setFailedBlock:^{
         if ([delegate respondsToSelector:callback])
             [delegate performSelector:callback withObject:[NSNumber numberWithBool:NO]];
@@ -53,16 +79,176 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
 - (void)getPrimaryAccount {
     
+    NSString *accountsPath = [NSString stringWithFormat:@"/accounts.xml"];
+    NSURL *accountsURL = [NSURL URLWithString:accountsPath relativeToURL:RPM_URL];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:accountsURL];
+    [request setDelegate:self];
+    [request addRequestHeader:@"x-api-key" value:[self storedAPIKey]];
+    
+    [request setCompletionBlock:^{
+        NSData *responseData = [request responseData];
+        [self parsePrimaryAccount:responseData];
+    }];
+    
+    [request setFailedBlock:^{
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:ACCOUNT_FAILED_NOTIFICATION object:nil]];
+    }];
+    
+    [request startAsynchronous];
+}
+
+- (void)parsePrimaryAccount:(NSData *)data {
+    NSError *error;
+    NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData:data options:0 error:&error];
+    
+    if (!doc) {
+        DebugLog(@"There was an error parsing the data! %@", data);
+        return;
+    }
+    
+    //DebugLog(@"XML document for accounts %@", doc);
+    
+    NSArray *accountNodes = [doc nodesForXPath:@"//account" error:&error];
+    NSXMLElement *firstAccountNode;
+    
+    for (int i = 0; i < accountNodes.count; i++) {
+        firstAccountNode = [accountNodes objectAtIndex:i];
+        DebugLog(@"The first account node is %@", firstAccountNode);
+        for (int j = 0; j < [[firstAccountNode children] count]; j++) {
+            NSXMLElement *attribute = [[firstAccountNode children] objectAtIndex:j];
+            //DebugLog(@"The current attribute is %@", attribute);
+            if ([@"id" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+                primaryAccountId = [[attribute stringValue] intValue];
+            }
+        }
+    }
+    
+    DebugLog(@"The primary account id is %i", primaryAccountId);
+    
+    if (primaryAccountId) {
+        [self getPrimaryApplication];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:ACCOUNT_FAILED_NOTIFICATION object:nil]];
+    }
+    
+    
 }
 
 - (void)getPrimaryApplication {
+    NSString *appPath = [NSString stringWithFormat:@"/accounts/%i/applications.xml", primaryAccountId];
+    NSURL *appURL = [NSURL URLWithString:appPath relativeToURL:RPM_URL];
     
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:appURL];
+    [request setDelegate:self];
+    [request addRequestHeader:@"x-api-key" value:[self storedAPIKey]];
+    
+    [request setCompletionBlock:^{
+        NSData *responseData = [request responseData];
+        [self parsePrimaryApplication:responseData];
+    }];
+    
+    [request setFailedBlock:^{
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:APPLICATION_FAILED_NOTIFICATION object:nil]];
+    }];
+    
+    [request startAsynchronous];
+}
+
+- (void)parsePrimaryApplication:(NSData *)data {
+    NSError *error;
+    NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData:data options:0 error:&error];
+    
+    if (!doc) {
+        DebugLog(@"There was an error parsing the data! %@", data);
+        return;
+    }
+    
+    //DebugLog(@"Application response XML is %@", doc);
+    
+    NSArray *appNodes = [doc nodesForXPath:@"//application" error:&error];
+    NSXMLElement *firstAppNode;
+    
+    for (int i = 0; i < appNodes.count; i++) {
+        firstAppNode = [appNodes objectAtIndex:i];
+        DebugLog(@"The first account node is %@", firstAppNode);
+        for (int j = 0; j < [[firstAppNode children] count]; j++) {
+            NSXMLElement *attribute = [[firstAppNode children] objectAtIndex:j];
+            //DebugLog(@"The current attribute is %@", attribute);
+            if ([@"id" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+                primaryApplicationId = [[attribute stringValue] intValue];
+            }
+        }
+        
+        break; // first one is primary
+    }
+    
+    DebugLog(@"Primary application id is %i", primaryApplicationId);
+    
+    NSString *note = (primaryApplicationId ? APPLICATION_OBTAINED_NOTIFICATION : APPLICATION_FAILED_NOTIFICATION);
+    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:note object:nil]];
 }
 
 #pragma mark - Metrics
 
 - (void)getPrimaryMetrics {
+    NSString *statsPath = [NSString stringWithFormat:@"/accounts/%i/applications/%i/threshold_values.xml", primaryAccountId, primaryApplicationId];
+    NSURL *statsURL = [NSURL URLWithString:statsPath relativeToURL:RPM_URL];
     
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:statsURL];
+    [request setDelegate:self];
+    [request addRequestHeader:@"x-api-key" value:[self storedAPIKey]];
+    
+    [request setCompletionBlock:^{
+        NSData *responseData = [request responseData];
+        [self parsePrimaryMetrics:responseData];
+    }];
+    
+    [request setFailedBlock:^{
+        DebugLog(@"primary metrics failed!");
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:APPLICATION_FAILED_NOTIFICATION object:nil]];
+    }];
+    
+    [request startAsynchronous];
+}
+
+- (void)parsePrimaryMetrics:(NSData *)data {
+    NSError *error;
+    NSXMLDocument *doc = [[NSXMLDocument alloc] initWithData:data options:0 error:&error];
+    
+    if (!doc) {
+        DebugLog(@"There was an error parsing the data! %@", data);
+        return;
+    }
+    
+    //DebugLog(@"Metrics response XML is %@", doc);
+    
+    NSArray *statNodes = [doc nodesForXPath:@"//threshold_value" error:&error];
+    for (int i = 0; i < statNodes.count; i++) {
+        
+        NSXMLElement *stat = [statNodes objectAtIndex:i];
+        //DebugLog(@"The current attribute is %@", stat);
+        
+        if ([@"Apdex" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            self.apdex = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+            DebugLog(@"Apdex is %@", self.apdex);
+        }
+        
+        if ([@"Error Rate" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            self.errorPercent = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+        }
+        
+        if ([@"Throughput" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            self.throughput = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+        }
+        
+        if ([@"Response Time" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            self.responseTime = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:METRICS_OBTAINED_NOTIFICATION object:nil]];
 }
 
 @end
