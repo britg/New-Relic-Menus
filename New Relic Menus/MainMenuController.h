@@ -53,6 +53,7 @@
 - (void)notifyPreferencesAction;
 - (void)getPrimaryMetrics;
 - (void)showMainMenu;
+- (void)notifyQuit;
 
 
 @end

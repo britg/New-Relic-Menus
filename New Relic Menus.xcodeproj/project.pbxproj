@@ -37,6 +37,7 @@
 		EA438E15139BF11000B6F79E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA438E14139BF11000B6F79E /* libxml2.dylib */; };
 		EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09C513AD32A3001ABD88 /* MenuView.xib */; };
 		EA7B09C913AD49A5001ABD88 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7B09C813AD49A5001ABD88 /* StatsView.m */; };
+		EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09CE13AD538F001ABD88 /* Icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		EA7B09C513AD32A3001ABD88 /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuView.xib; path = ../MenuView.xib; sourceTree = "<group>"; };
 		EA7B09C713AD49A5001ABD88 /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
 		EA7B09C813AD49A5001ABD88 /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
+		EA7B09CE13AD538F001ABD88 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 		EA438D98139AD39500B6F79E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA7B09CE13AD538F001ABD88 /* Icon.icns */,
 				EA7B09C513AD32A3001ABD88 /* MenuView.xib */,
 				EA438D99139AD3B500B6F79E /* newrelic.png */,
 			);
@@ -350,6 +353,7 @@
 				EA438DA7139AD87A00B6F79E /* README in Resources */,
 				EA438DCE139AF10400B6F79E /* PreferencesWindow.xib in Resources */,
 				EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */,
+				EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
