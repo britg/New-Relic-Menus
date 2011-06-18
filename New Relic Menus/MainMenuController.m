@@ -41,24 +41,30 @@
     menuItem = [menu addItemWithTitle:@"Preferences" action:@selector(notifyPreferencesAction) keyEquivalent:@"P"];
     [menuItem setToolTip:@"Change your API Key"];
     [menuItem setTarget:self];
+    
+    [mainStatusItem setMenu:menu];
+    [mainStatusItem setHighlightMode:YES];
+    [mainStatusItem setToolTip:@"New Relic Menus"];
+    [mainStatusItem setImage:[NSImage imageNamed:@"newrelic"]];
 }
 
+#pragma mark - States
+
+- (void)refresh {
+    [self setStateLoading];
+    [self getPrimaryMetrics];
+}
+
+- (void)setStateLoading {
+    [mainStatusItem setLength:100];
+    [mainStatusItem setTitle:@"Loading..."];
+}
+
+#pragma mark - Actions
 
 - (void)notifyPreferencesAction {
     [[NSNotificationCenter defaultCenter] 
-     postNotification:[NSNotification notificationWithName:SHOW_PREFERENCES object:nil]];
-}
-
-#pragma mark - Main Status Item
-
-- (void)refresh {
-    [mainStatusItem setMenu:menu];
-    [mainStatusItem setLength:100];
-    [mainStatusItem setHighlightMode:YES];
-    [mainStatusItem setTitle:@"Loading..."];
-    [mainStatusItem setToolTip:@"New Relic Menus"];
-    [mainStatusItem setImage:[NSImage imageNamed:@"newrelic"]];
-    [self getPrimaryMetrics];
+     postNotification:[NSNotification notificationWithName:SHOW_PREFERENCES_NOTIFICATION object:nil]];
 }
 
 - (void)getPrimaryMetrics {

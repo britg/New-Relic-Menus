@@ -30,7 +30,6 @@
     } else {
         [mainMenu refresh];
     }
-    
 }
 
 - (BOOL)hasAPIKey {
@@ -52,13 +51,13 @@
     // Show preferences window
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(presentPreferencesWindow) 
-                                                 name:SHOW_PREFERENCES 
+                                                 name:SHOW_PREFERENCES_NOTIFICATION
                                                object:nil];
     
     // api key added
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(showMenuOrPreferences) 
-                                                 name:API_KEY_VALIDATED
+                                                 name:API_KEY_VALIDATED_NOTIFICATION
                                                object:nil];
 }
 

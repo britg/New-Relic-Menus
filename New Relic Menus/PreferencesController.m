@@ -85,7 +85,7 @@
         [self saveAPIKey:currentAPIKey];
         [[self window] close];
         [[NSNotificationCenter defaultCenter] 
-         postNotification:[NSNotification notificationWithName:API_KEY_VALIDATED object:nil]];
+         postNotification:[NSNotification notificationWithName:API_KEY_VALIDATED_NOTIFICATION object:nil]];
     } else {
         [self notifyInvalidAPIKey];
     }
