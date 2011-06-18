@@ -22,5 +22,9 @@
 
 - (void)getPrimaryMetrics;
 
+// States
+
+- (void)setStateLoading;
+
 
 @end
