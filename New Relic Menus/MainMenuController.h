@@ -13,6 +13,7 @@
     NSStatusItem *mainStatusItem;
     NSMenu *menu;
     NSMenu *appSubMenu;
+    NSMenu *accountSubMenu;
     NSTimer *timer;
     
     IBOutlet StatsView *menuView;
@@ -24,6 +25,9 @@
     IBOutlet NSTextField *errorRateUnits;
     IBOutlet NSTextField *apdexLabel;
     IBOutlet NSTextField *apdexUnits;
+    
+    NSMenuItem *currentAppMenuItem;
+    NSMenuItem *currentAccountMenuItem;
 }
 
 @property (nonatomic, retain) IBOutlet StatsView *menuView;
@@ -57,5 +61,5 @@
 - (void)notifyQuit;
 - (void)adjustLayout;
 - (void)setCurrentApplication:(NSMenuItem *)selectedMenuItem;
-
+- (void)setCurrentAccount:(NSMenuItem *)selectedMenuItem;
 @end
