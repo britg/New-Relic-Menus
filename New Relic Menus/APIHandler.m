@@ -15,7 +15,10 @@
 @implementation APIHandler
 SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
+@synthesize accounts;
+@synthesize currentAccount;
 @synthesize currentAPIKey;
+@synthesize currentApplication;
 @synthesize apdex;
 @synthesize errorPercent;
 @synthesize throughput;
@@ -118,8 +121,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     
     NSArray *accountNodes = [doc nodesForXPath:@"//account" error:&error];
     NSXMLElement *firstAccountNode;
+    NRMAccount *account;
+    self.accounts = [NSMutableArray array];
     
     for (int i = 0; i < accountNodes.count; i++) {
+        account = [[NRMAccount alloc] init];
         
         firstAccountNode = [accountNodes objectAtIndex:i];
         DebugLog(@"The first account node is %@", firstAccountNode);
@@ -128,16 +134,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
             NSXMLElement *attribute = [[firstAccountNode children] objectAtIndex:j];
             //DebugLog(@"The current attribute is %@", attribute);
             if ([@"id" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-                primaryAccountId = [[attribute stringValue] intValue];
-                
+                if (i == 0) {
+                    primaryAccountId = [[attribute stringValue] intValue];
+                }
+                account.accountId = [[attribute stringValue] intValue];
+            }
+            
+            if ([@"name" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+                account.name = [attribute stringValue];
             }
         }
+        
+        [self.accounts addObject:account];
     }
     
     DebugLog(@"The primary account id is %i", primaryAccountId);
     
     if (primaryAccountId) {
-        [self getPrimaryApplication];
+        [self setAccount:primaryAccountId];
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:ACCOUNT_OBTAINED_NOTIFICATION object:nil]];
     } else {
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:ACCOUNT_FAILED_NOTIFICATION object:nil]];
     }
@@ -211,6 +226,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     NSString *note = (primaryApplicationId ? APPLICATION_OBTAINED_NOTIFICATION : APPLICATION_FAILED_NOTIFICATION);
     
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:note object:nil]];
+    [self setApplication:primaryApplicationId];
 }
 
 #pragma mark - Metrics
@@ -274,8 +290,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:METRICS_OBTAINED_NOTIFICATION object:nil]];
 }
 
-- (void)setCurrentApplication:(int)appId {
+- (void)setAccount:(int)accountId {
+    primaryAccountId = accountId;
+    for (int i = 0; i < accounts.count; i++) {
+        NRMAccount *account = [accounts objectAtIndex:i];
+        if (accountId == account.accountId) {
+            self.currentAccount = account;
+            break;
+        }
+    }
+    [self getPrimaryApplication];
+}
+
+- (void)setApplication:(int)appId {
     primaryApplicationId = appId;
+    for (int i = 0; i < applications.count; i++) {
+        NRMApplication *app = [applications objectAtIndex:i];
+        if (appId == app.appId) {
+            self.currentApplication = app;
+            break;
+        }
+    }
     [self getPrimaryMetrics];
 }
 

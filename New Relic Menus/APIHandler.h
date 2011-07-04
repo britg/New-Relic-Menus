@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "NRMApplication.h"
+#import "NRMAccount.h"
 
 @interface APIHandler : NSObject {
     int primaryAccountId;
     int primaryApplicationId;
     
+    NSMutableArray *accounts;
+    NRMAccount *currentAccount;
+    
     NSMutableArray *applications;
+    NRMApplication *currentApplication;
     
     NSString *currentAPIKey;
     
@@ -25,7 +30,10 @@
 }
 
 @property (nonatomic, retain) NSString *currentAPIKey;
+@property (nonatomic, retain) NSMutableArray *accounts;
+@property (nonatomic, retain) NRMAccount *currentAccount;
 @property (nonatomic, retain) NSMutableArray *applications;
+@property (nonatomic, retain) NRMApplication *currentApplication;
 @property (nonatomic, retain) NSNumber *apdex;
 @property (nonatomic, retain) NSNumber *errorPercent;
 @property (nonatomic, retain) NSNumber *throughput;
@@ -49,6 +57,7 @@
 - (void)getPrimaryMetrics;
 - (void)parsePrimaryMetrics:(NSData *)data;
 
-- (void)setCurrentApplication:(int)appId;
+- (void)setApplication:(int)appId;
+- (void)setAccount:(int)accountId;
 
 @end

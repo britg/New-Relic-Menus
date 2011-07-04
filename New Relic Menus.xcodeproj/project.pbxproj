@@ -39,6 +39,7 @@
 		EA7B09C913AD49A5001ABD88 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7B09C813AD49A5001ABD88 /* StatsView.m */; };
 		EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09CE13AD538F001ABD88 /* Icon.icns */; };
 		EADCE92E13C1648F00224A8D /* NRMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EADCE92D13C1648F00224A8D /* NRMApplication.m */; };
+		EADCE93213C1FEE800224A8D /* NRMAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = EADCE93113C1FEE800224A8D /* NRMAccount.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		EA7B09CE13AD538F001ABD88 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		EADCE92C13C1648F00224A8D /* NRMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRMApplication.h; sourceTree = "<group>"; };
 		EADCE92D13C1648F00224A8D /* NRMApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NRMApplication.m; sourceTree = "<group>"; };
+		EADCE93013C1FEE800224A8D /* NRMAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRMAccount.h; sourceTree = "<group>"; };
+		EADCE93113C1FEE800224A8D /* NRMAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NRMAccount.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,8 @@
 				EA7B09C813AD49A5001ABD88 /* StatsView.m */,
 				EADCE92C13C1648F00224A8D /* NRMApplication.h */,
 				EADCE92D13C1648F00224A8D /* NRMApplication.m */,
+				EADCE93013C1FEE800224A8D /* NRMAccount.h */,
+				EADCE93113C1FEE800224A8D /* NRMAccount.m */,
 			);
 			path = "New Relic Menus";
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 				EA438E10139BF0A900B6F79E /* ASINetworkQueue.m in Sources */,
 				EA7B09C913AD49A5001ABD88 /* StatsView.m in Sources */,
 				EADCE92E13C1648F00224A8D /* NRMApplication.m in Sources */,
+				EADCE93213C1FEE800224A8D /* NRMAccount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

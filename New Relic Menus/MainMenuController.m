@@ -9,6 +9,7 @@
 #import "MainMenuController.h"
 #import "APIHandler.h"
 #import "NRMApplication.h"
+#import "NRMAccount.h"
 
 @implementation MainMenuController
 
@@ -50,16 +51,30 @@
     NSZone *menuZone = [NSMenu menuZone];
 	menu = [[NSMenu allocWithZone:menuZone] init];
     
+    /* Create the Account switcher */
+    NSMenuItem *accountSwitcherItem = [[NSMenuItem alloc] initWithTitle:@"Select Account" action:nil keyEquivalent:@"A"];
+    accountSubMenu = [[NSMenu allocWithZone:menuZone] init];
+    currentAccountMenuItem = [menu addItemWithTitle:@"Current Account" action:nil keyEquivalent:@""];
+    [accountSwitcherItem setSubmenu:accountSubMenu];
+    [accountSwitcherItem setToolTip:@"Switch accounts"];
+    [accountSwitcherItem setTarget:self];
+    [menu addItem:accountSwitcherItem];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    
+    
     /* Create the Application switcher */
     NSMenuItem *appSwitcherItem = [[NSMenuItem alloc] initWithTitle:@"Select Application" action:nil keyEquivalent:@"a"];
     appSubMenu = [[NSMenu allocWithZone:menuZone] init];
-    
+    currentAppMenuItem = [menu addItemWithTitle:@"Current Application" action:nil keyEquivalent:@""];
     [appSwitcherItem setSubmenu:appSubMenu];
     [appSwitcherItem setToolTip:@"Switch applications"];
     [appSwitcherItem setTarget:self];
     [menu addItem:appSwitcherItem];
     
     [menu addItem:[NSMenuItem separatorItem]];
+    
+    /* Create the miscellaneous actions */
     
     NSMenuItem *menuItem;
     
@@ -93,8 +108,8 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(getPrimaryMetrics) 
-                                                 name:APPLICATION_OBTAINED_NOTIFICATION
+                                             selector:@selector(accountsUpdated) 
+                                                 name:ACCOUNT_OBTAINED_NOTIFICATION
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -115,7 +130,8 @@
 
 - (void)statsUpdated {
     DebugLog(@"Stats updated!");
-    
+    NRMApplication *app = [[APIHandler sharedInstance] currentApplication];
+    [currentAppMenuItem setTitle:app.name];
     [self.throughputLabel setStringValue:[[[APIHandler sharedInstance] throughput] stringValue]];
     [self.responseTimeLabel setStringValue:[NSString stringWithFormat:@"%.0f", [[[APIHandler sharedInstance] responseTime] floatValue]]];
     [self.errorRateLabel setStringValue:[NSString stringWithFormat:@"%.02f", [[[APIHandler sharedInstance] errorPercent] floatValue]]];
@@ -193,6 +209,7 @@
     NSMenuItem *menuItem;
     NRMApplication *app;
     NSArray *apps = [[APIHandler sharedInstance] applications];
+    [appSubMenu removeAllItems];
     for (int i = 0; i < apps.count; i++) {
         app = [apps objectAtIndex:i];
         menuItem = [appSubMenu addItemWithTitle:app.name 
@@ -201,6 +218,24 @@
         [menuItem setToolTip:[NSString stringWithFormat:@"Set application to %@", app.name]];
         [menuItem setTarget:self];
         [menuItem setRepresentedObject:app];
+    }
+    
+    NRMAccount *currentAccount = [[APIHandler sharedInstance] currentAccount];
+    [currentAccountMenuItem setTitle:currentAccount.name];
+}
+
+- (void)accountsUpdated {
+    NSMenuItem *menuItem;
+    NRMAccount *account;
+    NSArray *accounts = [[APIHandler sharedInstance] accounts];
+    for (int i = 0; i < accounts.count; i++) {
+        account = [accounts objectAtIndex:i];
+        menuItem = [accountSubMenu addItemWithTitle:account.name 
+                                         action:@selector(setCurrentAccount:) 
+                                  keyEquivalent:[NSString stringWithFormat:@"%i", i]];
+        [menuItem setToolTip:[NSString stringWithFormat:@"Set account to %@", account.name]];
+        [menuItem setTarget:self];
+        [menuItem setRepresentedObject:account];
     }
 }
 
@@ -248,7 +283,12 @@
 
 - (void)setCurrentApplication:(NSMenuItem *)selectedMenuItem {
     NRMApplication *app = [selectedMenuItem representedObject];
-    [[APIHandler sharedInstance] setCurrentApplication:app.appId];
+    [[APIHandler sharedInstance] setApplication:app.appId];
+}
+
+- (void)setCurrentAccount:(NSMenuItem *)selectedMenuItem {
+    NRMAccount *account = [selectedMenuItem representedObject];
+    [[APIHandler sharedInstance] setAccount:account.accountId];
 }
 
 @end
