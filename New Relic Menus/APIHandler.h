@@ -13,6 +13,8 @@
     int primaryAccountId;
     int primaryApplicationId;
     
+    NSMutableArray *applications;
+    
     NSString *currentAPIKey;
     
     NSNumber *apdex;
@@ -23,7 +25,7 @@
 }
 
 @property (nonatomic, retain) NSString *currentAPIKey;
-
+@property (nonatomic, retain) NSMutableArray *applications;
 @property (nonatomic, retain) NSNumber *apdex;
 @property (nonatomic, retain) NSNumber *errorPercent;
 @property (nonatomic, retain) NSNumber *throughput;
@@ -46,5 +48,7 @@
 
 - (void)getPrimaryMetrics;
 - (void)parsePrimaryMetrics:(NSData *)data;
+
+- (void)setCurrentApplication:(int)appId;
 
 @end

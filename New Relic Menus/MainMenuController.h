@@ -12,6 +12,7 @@
 @interface MainMenuController : NSObject {
     NSStatusItem *mainStatusItem;
     NSMenu *menu;
+    NSMenu *appSubMenu;
     NSTimer *timer;
     
     IBOutlet StatsView *menuView;
@@ -54,6 +55,7 @@
 - (void)getPrimaryMetrics;
 - (void)showMainMenu;
 - (void)notifyQuit;
-
+- (void)adjustLayout;
+- (void)setCurrentApplication:(NSMenuItem *)selectedMenuItem;
 
 @end

@@ -10,8 +10,10 @@
 #import "SynthesizeSingleton.h"
 #import "ASIHTTPRequest.h"
 #import "AGKeychain.h"
+#import "NRMApplication.h"
 
 @implementation APIHandler
+SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
 @synthesize currentAPIKey;
 @synthesize apdex;
@@ -19,8 +21,7 @@
 @synthesize throughput;
 @synthesize cpu;
 @synthesize responseTime;
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
+@synthesize applications;
 
 - (void)dealloc
 {
@@ -119,13 +120,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     NSXMLElement *firstAccountNode;
     
     for (int i = 0; i < accountNodes.count; i++) {
+        
         firstAccountNode = [accountNodes objectAtIndex:i];
         DebugLog(@"The first account node is %@", firstAccountNode);
-        for (int j = 0; j < [[firstAccountNode children] count]; j++) {
+        
+        for (int j = 0; j < [[firstAccountNode children] count]; j++) {    
             NSXMLElement *attribute = [[firstAccountNode children] objectAtIndex:j];
             //DebugLog(@"The current attribute is %@", attribute);
             if ([@"id" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
                 primaryAccountId = [[attribute stringValue] intValue];
+                
             }
         }
     }
@@ -174,22 +178,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     
     NSArray *appNodes = [doc nodesForXPath:@"//application" error:&error];
     NSXMLElement *firstAppNode;
+    self.applications = [NSMutableArray array];
+    NRMApplication *app;
     
     for (int i = 0; i < appNodes.count; i++) {
+        app = [[NRMApplication alloc] init];
         firstAppNode = [appNodes objectAtIndex:i];
         DebugLog(@"The first account node is %@", firstAppNode);
         for (int j = 0; j < [[firstAppNode children] count]; j++) {
             NSXMLElement *attribute = [[firstAppNode children] objectAtIndex:j];
-            //DebugLog(@"The current attribute is %@", attribute);
+            DebugLog(@"The current attribute is %@", attribute);
             if ([@"id" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-                primaryApplicationId = [[attribute stringValue] intValue];
+                if (i == 0) {
+                    primaryApplicationId = [[attribute stringValue] intValue];
+                }
+                
+                app.appId = [[attribute stringValue] intValue];
+            }
+            
+            if ([@"name" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+                app.name = [attribute stringValue];
             }
         }
         
-        break; // first one is primary
+        
+        [self.applications addObject:app];
     }
     
     DebugLog(@"Primary application id is %i", primaryApplicationId);
+    DebugLog(@"Applications are %@", self.applications);
     
     NSString *note = (primaryApplicationId ? APPLICATION_OBTAINED_NOTIFICATION : APPLICATION_FAILED_NOTIFICATION);
     
@@ -255,6 +272,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     }
     
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:METRICS_OBTAINED_NOTIFICATION object:nil]];
+}
+
+- (void)setCurrentApplication:(int)appId {
+    primaryApplicationId = appId;
+    [self getPrimaryMetrics];
 }
 
 @end
