@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>New Relic Menu Bars.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>New Relic Menus.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
