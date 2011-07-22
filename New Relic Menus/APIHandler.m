@@ -267,7 +267,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
     for (int i = 0; i < statNodes.count; i++) {
         
         NSXMLElement *stat = [statNodes objectAtIndex:i];
-        //DebugLog(@"The current attribute is %@", stat);
+        DebugLog(@"The current attribute is %@", stat);
         
         if ([@"Apdex" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
             self.apdex = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
@@ -276,14 +276,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
         
         if ([@"Error Rate" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
             self.errorPercent = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+            DebugLog(@"Error Rate is %@", self.errorPercent);
         }
         
         if ([@"Throughput" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            self.throughput = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+            self.throughput = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] integerValue]];
+            DebugLog(@"Throughput is %@", self.throughput);
         }
         
         if ([@"Response Time" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            self.responseTime = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
+            self.responseTime = [NSNumber numberWithFloat:([[[stat attributeForName:@"metric_value"] stringValue] floatValue]*1000)];
+            DebugLog(@"Response time is %@", self.responseTime);
         }
     }
     
