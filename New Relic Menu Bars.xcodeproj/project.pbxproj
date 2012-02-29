@@ -37,6 +37,7 @@
 		EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09C513AD32A3001ABD88 /* MenuView.xib */; };
 		EA7B09C913AD49A5001ABD88 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7B09C813AD49A5001ABD88 /* StatsView.m */; };
 		EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09CE13AD538F001ABD88 /* Icon.icns */; };
+		EA85404613E0A4320026AAF4 /* toolbar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EA85404513E0A4320026AAF4 /* toolbar_icon.png */; };
 		EAD29D7A13DA079C00C7946F /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD29D7913DA079C00C7946F /* libz.1.2.5.dylib */; };
 		EADCE92E13C1648F00224A8D /* NRMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EADCE92D13C1648F00224A8D /* NRMApplication.m */; };
 		EADCE93213C1FEE800224A8D /* NRMAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = EADCE93113C1FEE800224A8D /* NRMAccount.m */; };
@@ -110,6 +111,7 @@
 		EA7B09C713AD49A5001ABD88 /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
 		EA7B09C813AD49A5001ABD88 /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
 		EA7B09CE13AD538F001ABD88 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
+		EA85404513E0A4320026AAF4 /* toolbar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_icon.png; sourceTree = "<group>"; };
 		EAD29D7913DA079C00C7946F /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		EADCE92C13C1648F00224A8D /* NRMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRMApplication.h; sourceTree = "<group>"; };
 		EADCE92D13C1648F00224A8D /* NRMApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NRMApplication.m; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		EA438D98139AD39500B6F79E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA85404513E0A4320026AAF4 /* toolbar_icon.png */,
 				EA7B09CE13AD538F001ABD88 /* Icon.icns */,
 				EA7B09C513AD32A3001ABD88 /* MenuView.xib */,
 				EA438D99139AD3B500B6F79E /* newrelic.png */,
@@ -366,6 +369,7 @@
 				EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */,
 				EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */,
 				EADCE93413C259E800224A8D /* Info.plist in Resources */,
+				EA85404613E0A4320026AAF4 /* toolbar_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

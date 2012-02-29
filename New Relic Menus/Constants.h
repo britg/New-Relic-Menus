@@ -23,4 +23,6 @@
 
 #define STATS_VIEW_CLICKED_NOTIFICATION @"stats_view_clicked"
 
+#define DISPLAY_PREFERENCES_UPDATED @"display_preferences_updated"
+
 #define QUIT_NOTIFICATION @"quit"

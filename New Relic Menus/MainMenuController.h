@@ -28,6 +28,11 @@
     
     NSMenuItem *currentAppMenuItem;
     NSMenuItem *currentAccountMenuItem;
+    
+    NSMenuItem *throughputMenuItem;
+    NSMenuItem *responseTimeMenuItem;
+    NSMenuItem *errorRateMenuItem;
+    NSMenuItem *apdexMenuItem;
 }
 
 @property (nonatomic, retain) IBOutlet StatsView *menuView;
@@ -49,6 +54,7 @@
 // States
 
 - (void)setStateLoading;
+- (BOOL)stateForOption:(NSString *)option;
 
 // Actions
 - (void)coldStart;

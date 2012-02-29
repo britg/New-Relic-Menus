@@ -163,7 +163,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 - (void)getPrimaryApplication {
     NSString *appPath = [NSString stringWithFormat:@"/accounts/%i/applications.xml", primaryAccountId];
     NSURL *appURL = [NSURL URLWithString:appPath relativeToURL:RPM_URL];
-    
+    DebugLog(@"App url is %@", appURL);
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:appURL];
     [request setDelegate:self];
     [request addRequestHeader:@"x-api-key" value:[self storedAPIKey]];
@@ -285,7 +285,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
         }
         
         if ([@"Response Time" compare:[[stat attributeForName:@"name"] stringValue] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            self.responseTime = [NSNumber numberWithFloat:([[[stat attributeForName:@"metric_value"] stringValue] floatValue]*1000)];
+            self.responseTime = [NSNumber numberWithFloat:[[[stat attributeForName:@"metric_value"] stringValue] floatValue]];
             DebugLog(@"Response time is %@", self.responseTime);
         }
     }

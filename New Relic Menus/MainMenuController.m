@@ -74,11 +74,20 @@
     
     [menu addItem:[NSMenuItem separatorItem]];
     
+    /* Placeholders for stats */
+    throughputMenuItem = [menu addItemWithTitle:@"Throughput: ..." action:nil keyEquivalent:@""];
+    responseTimeMenuItem = [menu addItemWithTitle:@"Response Time: ..." action:nil keyEquivalent:@""];
+    errorRateMenuItem = [menu addItemWithTitle:@"Errors: ..." action:nil keyEquivalent:@""];
+    apdexMenuItem = [menu addItemWithTitle:@"Apdex: ..." action:nil keyEquivalent:@""];
+    
+    [menu addItem:[NSMenuItem separatorItem]];
+    
+    
     /* Create the miscellaneous actions */
     
     NSMenuItem *menuItem;
     
-    menuItem = [menu addItemWithTitle:@"New Relic Dashboard" action:@selector(openNewRelicDashboard) keyEquivalent:@"o"];
+    menuItem = [menu addItemWithTitle:@"Dashboard" action:@selector(openNewRelicDashboard) keyEquivalent:@"o"];
     [menuItem setToolTip:@"Open Your New Relic Dashboard"];
     [menuItem setTarget:self];
     
@@ -116,6 +125,11 @@
                                              selector:@selector(showMainMenu) 
                                                  name:STATS_VIEW_CLICKED_NOTIFICATION
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(adjustLayout) 
+                                                 name:DISPLAY_PREFERENCES_UPDATED
+                                               object:nil];
 }
 
 #pragma mark - States
@@ -128,6 +142,18 @@
     [mainStatusItem setTitle:@"Loading..."];
 }
 
+- (BOOL)stateForOption:(NSString *)option {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DebugLog(@"default keys are %@: %@",option,  [defaults valueForKey:option]);
+    
+    if (![defaults valueForKey:option]) {
+        return YES;
+    }
+    
+    NSNumber *boolVal = [defaults valueForKey:option];
+    return [boolVal boolValue];
+}
+
 - (void)statsUpdated {
     DebugLog(@"Stats updated!");
     NRMApplication *app = [[APIHandler sharedInstance] currentApplication];
@@ -137,6 +163,11 @@
     [self.errorRateLabel setStringValue:[NSString stringWithFormat:@"%.02f", [[[APIHandler sharedInstance] errorPercent] floatValue]]];
     [self.apdexLabel setStringValue:[NSString stringWithFormat:@"%.02f", [[[APIHandler sharedInstance] apdex] floatValue]]];
     
+    [throughputMenuItem setTitle:[NSString stringWithFormat:@"Throughput: %@rpm",[[[APIHandler sharedInstance] throughput] stringValue]]];
+    [responseTimeMenuItem setTitle:[NSString stringWithFormat:@"Response Time: %.0fms", [[[APIHandler sharedInstance] responseTime] floatValue]]];
+    [errorRateMenuItem setTitle:[NSString stringWithFormat:@"Errors: %.02f%%", [[[APIHandler sharedInstance] errorPercent] floatValue]]];
+    [apdexMenuItem setTitle:[NSString stringWithFormat:@"Apdex: %.02f", [[[APIHandler sharedInstance] apdex] floatValue]]];
+    
     [self adjustLayout];
     
     [mainStatusItem setView:self.menuView];
@@ -145,63 +176,87 @@
 - (void)adjustLayout {
     NSRect s;
     NSRect u;
-    int offset;
+    int offset = 26;
     
-    [self.throughputLabel sizeToFit];
+    BOOL throughputOn = [self stateForOption:@"throughput"];
+    BOOL responseTimeOn = [self stateForOption:@"responseTime"];
+    BOOL errorsOn = [self stateForOption:@"errors"];
+    BOOL apdexOn = [self stateForOption:@"apdex"];
     
-    s = self.throughputLabel.frame;
-    offset = s.size.width + s.origin.x - 4;
-    u = self.throughputUnits.frame;
+    DebugLog(@"Throughput on? %@", (throughputOn ? @"YES" : @"OFF"));
+    DebugLog(@"responseTimeOn on? %@", (responseTimeOn ? @"YES" : @"OFF"));
+    DebugLog(@"errorsOn on? %@", (errorsOn ? @"YES" : @"OFF"));
+    DebugLog(@"apdexOn on? %@", (apdexOn ? @"YES" : @"OFF"));
     
-    [self.throughputUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
-    
-    u = self.throughputUnits.frame;
-    offset = u.size.width + u.origin.x;
-    
-    
-    
-    [self.responseTimeLabel sizeToFit];
-    s = self.responseTimeLabel.frame;
-    [self.responseTimeLabel setFrame:NSMakeRect(offset, s.origin.y, s.size.width, s.size.height)];
-    
-    s = self.responseTimeLabel.frame;
-    offset = s.size.width + s.origin.x - 4;
-    u = self.responseTimeUnits.frame;
-    
-    [self.responseTimeUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
-    
-    u = self.responseTimeUnits.frame;
-    offset = u.size.width + u.origin.x;
+    self.throughputLabel.hidden = YES;
+    self.throughputUnits.hidden = YES;
+    self.responseTimeLabel.hidden = YES;
+    self.responseTimeUnits.hidden = YES;
+    self.errorRateLabel.hidden = YES;
+    self.errorRateUnits.hidden = YES;
+    self.apdexLabel.hidden = YES;
+    self.apdexLabel.hidden = YES;
     
     
-    [self.errorRateLabel sizeToFit];
-    s = self.errorRateLabel.frame;
-    [self.errorRateLabel setFrame:NSMakeRect(offset, s.origin.y, s.size.width, s.size.height)];
+    if (throughputOn) {
+        self.throughputLabel.hidden = NO;
+        self.throughputUnits.hidden = NO;
+        
+        [self.throughputLabel sizeToFit];
+        s = self.throughputLabel.frame;
+        offset = s.size.width + s.origin.x - 4;
+        u = self.throughputUnits.frame;
+        [self.throughputUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
+        u = self.throughputUnits.frame;
+        offset = u.size.width + u.origin.x;
+    }
     
-    s = self.errorRateLabel.frame;
-    offset = s.size.width + s.origin.x - 4;
-    u = self.errorRateUnits.frame;
+    if (responseTimeOn) {
+        self.responseTimeLabel.hidden = NO;
+        self.responseTimeUnits.hidden = NO;
+        
+        [self.responseTimeLabel sizeToFit];
+        s = self.responseTimeLabel.frame;
+        [self.responseTimeLabel setFrame:NSMakeRect(offset, s.origin.y, s.size.width, s.size.height)];
+        s = self.responseTimeLabel.frame;
+        offset = s.size.width + s.origin.x - 4;
+        u = self.responseTimeUnits.frame;
+        [self.responseTimeUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
+        u = self.responseTimeUnits.frame;
+        offset = u.size.width + u.origin.x;
+    }
     
-    [self.errorRateUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
+    if (errorsOn) {
+        self.errorRateLabel.hidden = NO;
+        self.errorRateUnits.hidden = NO;
+        
+        [self.errorRateLabel sizeToFit];
+        s = self.errorRateLabel.frame;
+        [self.errorRateLabel setFrame:NSMakeRect(offset, s.origin.y, s.size.width, s.size.height)];
+        s = self.errorRateLabel.frame;
+        offset = s.size.width + s.origin.x - 4;
+        u = self.errorRateUnits.frame;
+        [self.errorRateUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
+        u = self.errorRateUnits.frame;
+        offset = u.size.width + u.origin.x;
+    }
     
-    u = self.errorRateUnits.frame;
-    offset = u.size.width + u.origin.x;
+    if (apdexOn) {
+        self.apdexLabel.hidden = NO;
+        self.apdexUnits.hidden = NO;
+        
+        [self.apdexLabel sizeToFit];
+        s = self.apdexLabel.frame;
+        [self.apdexLabel setFrame:NSMakeRect(offset, s.origin.y, s.size.width, s.size.height)];
+        s = self.apdexLabel.frame;
+        offset = s.size.width + s.origin.x - 4;
+        u = self.apdexUnits.frame;
+        [self.apdexUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
+        u = self.apdexUnits.frame;
+        offset = u.size.width + u.origin.x;
+    }
     
-    
-    [self.apdexLabel sizeToFit];
-    s = self.apdexLabel.frame;
-    [self.apdexLabel setFrame:NSMakeRect(offset, s.origin.y, s.size.width, s.size.height)];
-    
-    s = self.apdexLabel.frame;
-    offset = s.size.width + s.origin.x - 4;
-    u = self.apdexUnits.frame;
-    
-    [self.apdexUnits setFrame:NSMakeRect(offset, u.origin.y, u.size.width, u.size.height)];
-    
-    u = self.apdexUnits.frame;
-    offset = u.size.width + u.origin.x;
     s = self.menuView.frame;
-    
     [self.menuView setFrame:NSMakeRect(s.origin.x, s.origin.y, offset, s.size.height)];
 }
 
@@ -210,15 +265,18 @@
     NRMApplication *app;
     NSArray *apps = [[APIHandler sharedInstance] applications];
     [appSubMenu removeAllItems];
+    
+
     for (int i = 0; i < apps.count; i++) {
         app = [apps objectAtIndex:i];
         menuItem = [appSubMenu addItemWithTitle:app.name 
                                          action:@selector(setCurrentApplication:) 
-                                  keyEquivalent:[NSString stringWithFormat:@"%i", i]];
+                                  keyEquivalent:[NSString stringWithFormat:@""]];
         [menuItem setToolTip:[NSString stringWithFormat:@"Set application to %@", app.name]];
         [menuItem setTarget:self];
         [menuItem setRepresentedObject:app];
     }
+    
     
     NRMAccount *currentAccount = [[APIHandler sharedInstance] currentAccount];
     [currentAccountMenuItem setTitle:currentAccount.name];
@@ -232,7 +290,7 @@
         account = [accounts objectAtIndex:i];
         menuItem = [accountSubMenu addItemWithTitle:account.name 
                                          action:@selector(setCurrentAccount:) 
-                                  keyEquivalent:[NSString stringWithFormat:@"%i", i]];
+                                  keyEquivalent:[NSString stringWithFormat:@""]];
         [menuItem setToolTip:[NSString stringWithFormat:@"Set account to %@", account.name]];
         [menuItem setTarget:self];
         [menuItem setRepresentedObject:account];

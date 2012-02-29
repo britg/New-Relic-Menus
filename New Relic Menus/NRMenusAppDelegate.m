@@ -45,6 +45,7 @@
     }
     
     [preferences showWindow:self];
+    [preferences showAccountPreferences:self];
 }
 
 - (void)listenForNotifications {
