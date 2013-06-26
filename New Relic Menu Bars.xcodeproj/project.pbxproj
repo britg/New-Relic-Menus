@@ -18,7 +18,6 @@
 		EA438D8C139ACB9300B6F79E /* New_Relic_MenusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D8B139ACB9300B6F79E /* New_Relic_MenusTests.m */; };
 		EA438D97139AD17B00B6F79E /* MainMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D96139AD17B00B6F79E /* MainMenuController.m */; };
 		EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */ = {isa = PBXBuildFile; fileRef = EA438D99139AD3B500B6F79E /* newrelic.png */; };
-		EA438DA7139AD87A00B6F79E /* README in Resources */ = {isa = PBXBuildFile; fileRef = EA438DA6139AD87A00B6F79E /* README */; };
 		EA438DC7139AE68600B6F79E /* AGKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438DC6139AE68600B6F79E /* AGKeychain.m */; };
 		EA438DC9139AE6CC00B6F79E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA438DC8139AE6CC00B6F79E /* Security.framework */; };
 		EA438DCE139AF10400B6F79E /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA438DCD139AF10400B6F79E /* PreferencesWindow.xib */; };
@@ -75,7 +74,6 @@
 		EA438D95139AD17B00B6F79E /* MainMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuController.h; sourceTree = "<group>"; };
 		EA438D96139AD17B00B6F79E /* MainMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuController.m; sourceTree = "<group>"; };
 		EA438D99139AD3B500B6F79E /* newrelic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newrelic.png; sourceTree = "<group>"; };
-		EA438DA6139AD87A00B6F79E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		EA438DC5139AE68600B6F79E /* AGKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeychain.h; sourceTree = "<group>"; };
 		EA438DC6139AE68600B6F79E /* AGKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeychain.m; sourceTree = "<group>"; };
 		EA438DC8139AE6CC00B6F79E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -198,7 +196,6 @@
 				EA438D74139ACB9300B6F79E /* NRMenusAppDelegate.m */,
 				EA438D95139AD17B00B6F79E /* MainMenuController.h */,
 				EA438D96139AD17B00B6F79E /* MainMenuController.m */,
-				EA438DA6139AD87A00B6F79E /* README */,
 				EA438DCD139AF10400B6F79E /* PreferencesWindow.xib */,
 				EA438DD2139AF13800B6F79E /* PreferencesController.h */,
 				EA438DD3139AF13800B6F79E /* PreferencesController.m */,
@@ -364,7 +361,6 @@
 				EA438D6C139ACB9300B6F79E /* InfoPlist.strings in Resources */,
 				EA438D72139ACB9300B6F79E /* Credits.rtf in Resources */,
 				EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */,
-				EA438DA7139AD87A00B6F79E /* README in Resources */,
 				EA438DCE139AF10400B6F79E /* PreferencesWindow.xib in Resources */,
 				EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */,
 				EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */,
