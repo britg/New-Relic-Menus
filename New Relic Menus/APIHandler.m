@@ -83,7 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 
 - (NSURL *)dashboardURL {
     NSString *url = [NSString stringWithFormat:@"%@/accounts/%i/applications/%i", 
-                     RPM_DOMAIN, primaryAccountId, primaryApplicationId];
+                     DASHBOARD_DOMAIN, primaryAccountId, primaryApplicationId];
     return [NSURL URLWithString:url];
 }
 

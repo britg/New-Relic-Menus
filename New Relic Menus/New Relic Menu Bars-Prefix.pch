@@ -14,5 +14,6 @@
 #define DebugLog( s, ... )
 #endif
 
+#define DASHBOARD_DOMAIN [NSString stringWithFormat:@"https://rpm.newrelic.com"]
 #define RPM_DOMAIN [NSString stringWithFormat:@"https://api.newrelic.com"]
 #define RPM_URL [NSURL URLWithString:RPM_DOMAIN]
