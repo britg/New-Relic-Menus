@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>App Performance powered by New Relic Data</string>
+	<string>New Relic Data Menu Bar</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon</string>
+	<string>icon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.britg.newrelicmenubars</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -31,7 +31,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2011, Brit Gardner</string>
+	<string>Copyright 2013, Brit Gardner</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>

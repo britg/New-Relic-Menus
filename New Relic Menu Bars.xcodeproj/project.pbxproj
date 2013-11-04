@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E70B554B177B28B200DBE2CD /* NewRelicAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E70B554A177B28B200DBE2CD /* NewRelicAppIcon.png */; };
+		E70B5552177B2BDD00DBE2CD /* icon_512x512.icns in Resources */ = {isa = PBXBuildFile; fileRef = E70B5551177B2BDD00DBE2CD /* icon_512x512.icns */; };
+		E70B5554177B2E1D00DBE2CD /* icon_512x512@2x.icns in Resources */ = {isa = PBXBuildFile; fileRef = E70B5553177B2E1D00DBE2CD /* icon_512x512@2x.icns */; };
+		E7F1540F178E227E001E1E21 /* icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = E7F1540E178E227E001E1E21 /* icon.iconset */; };
 		EA438D62139ACB9300B6F79E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA438D61139ACB9300B6F79E /* Cocoa.framework */; };
 		EA438D6C139ACB9300B6F79E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA438D6A139ACB9300B6F79E /* InfoPlist.strings */; };
 		EA438D6F139ACB9300B6F79E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA438D6E139ACB9300B6F79E /* main.m */; };
@@ -35,12 +39,10 @@
 		EA438E15139BF11000B6F79E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EA438E14139BF11000B6F79E /* libxml2.dylib */; };
 		EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09C513AD32A3001ABD88 /* MenuView.xib */; };
 		EA7B09C913AD49A5001ABD88 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7B09C813AD49A5001ABD88 /* StatsView.m */; };
-		EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EA7B09CE13AD538F001ABD88 /* Icon.icns */; };
 		EA85404613E0A4320026AAF4 /* toolbar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EA85404513E0A4320026AAF4 /* toolbar_icon.png */; };
 		EAD29D7A13DA079C00C7946F /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD29D7913DA079C00C7946F /* libz.1.2.5.dylib */; };
 		EADCE92E13C1648F00224A8D /* NRMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EADCE92D13C1648F00224A8D /* NRMApplication.m */; };
 		EADCE93213C1FEE800224A8D /* NRMAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = EADCE93113C1FEE800224A8D /* NRMAccount.m */; };
-		EADCE93413C259E800224A8D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADCE93313C259E800224A8D /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E70B554A177B28B200DBE2CD /* NewRelicAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewRelicAppIcon.png; sourceTree = "<group>"; };
+		E70B554E177B28E100DBE2CD /* New Relic Menu Bars.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "New Relic Menu Bars.entitlements"; sourceTree = "<group>"; };
+		E70B5551177B2BDD00DBE2CD /* icon_512x512.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon_512x512.icns; path = ../icon_512x512.icns; sourceTree = "<group>"; };
+		E70B5553177B2E1D00DBE2CD /* icon_512x512@2x.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "icon_512x512@2x.icns"; path = "../icon_512x512@2x.icns"; sourceTree = "<group>"; };
+		E7F1540E178E227E001E1E21 /* icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = icon.iconset; sourceTree = "<group>"; };
 		EA438D5D139ACB9300B6F79E /* New Relic Menu Bars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Relic Menu Bars.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA438D61139ACB9300B6F79E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		EA438D64139ACB9300B6F79E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -108,7 +115,6 @@
 		EA7B09C513AD32A3001ABD88 /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuView.xib; path = ../MenuView.xib; sourceTree = "<group>"; };
 		EA7B09C713AD49A5001ABD88 /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
 		EA7B09C813AD49A5001ABD88 /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
-		EA7B09CE13AD538F001ABD88 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		EA85404513E0A4320026AAF4 /* toolbar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_icon.png; sourceTree = "<group>"; };
 		EAD29D7913DA079C00C7946F /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		EADCE92C13C1648F00224A8D /* NRMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NRMApplication.h; sourceTree = "<group>"; };
@@ -146,6 +152,7 @@
 		EA438D52139ACB9300B6F79E = {
 			isa = PBXGroup;
 			children = (
+				E70B554E177B28E100DBE2CD /* New Relic Menu Bars.entitlements */,
 				EA438D67139ACB9300B6F79E /* New Relic Menus */,
 				EA438D82139ACB9300B6F79E /* New Relic MenusTests */,
 				EA438D60139ACB9300B6F79E /* Frameworks */,
@@ -247,8 +254,11 @@
 		EA438D98139AD39500B6F79E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E7F1540E178E227E001E1E21 /* icon.iconset */,
+				E70B5551177B2BDD00DBE2CD /* icon_512x512.icns */,
+				E70B5553177B2E1D00DBE2CD /* icon_512x512@2x.icns */,
+				E70B554A177B28B200DBE2CD /* NewRelicAppIcon.png */,
 				EA85404513E0A4320026AAF4 /* toolbar_icon.png */,
-				EA7B09CE13AD538F001ABD88 /* Icon.icns */,
 				EA7B09C513AD32A3001ABD88 /* MenuView.xib */,
 				EA438D99139AD3B500B6F79E /* newrelic.png */,
 			);
@@ -335,6 +345,13 @@
 /* Begin PBXProject section */
 		EA438D54139ACB9300B6F79E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				TargetAttributes = {
+					EA438D5C139ACB9300B6F79E = {
+						DevelopmentTeam = 75YMX82YTK;
+					};
+				};
+			};
 			buildConfigurationList = EA438D57139ACB9300B6F79E /* Build configuration list for PBXProject "New Relic Menu Bars" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -363,9 +380,11 @@
 				EA438D9A139AD3B500B6F79E /* newrelic.png in Resources */,
 				EA438DCE139AF10400B6F79E /* PreferencesWindow.xib in Resources */,
 				EA7B09C613AD32A3001ABD88 /* MenuView.xib in Resources */,
-				EA7B09CF13AD538F001ABD88 /* Icon.icns in Resources */,
-				EADCE93413C259E800224A8D /* Info.plist in Resources */,
 				EA85404613E0A4320026AAF4 /* toolbar_icon.png in Resources */,
+				E70B554B177B28B200DBE2CD /* NewRelicAppIcon.png in Resources */,
+				E70B5552177B2BDD00DBE2CD /* icon_512x512.icns in Resources */,
+				E70B5554177B2E1D00DBE2CD /* icon_512x512@2x.icns in Resources */,
+				E7F1540F178E227E001E1E21 /* icon.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +531,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_ENTITLEMENTS = "New Relic Menu Bars.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -531,7 +552,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_ENTITLEMENTS = "New Relic Menu Bars.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
