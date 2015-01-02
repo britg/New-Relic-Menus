@@ -27,8 +27,8 @@
 {
     self = [super init];
     if (self) {
-        mainStatusItem = [[[NSStatusBar systemStatusBar] 
-                           statusItemWithLength:NSVariableStatusItemLength] retain];
+        mainStatusItem = [[NSStatusBar systemStatusBar] 
+                           statusItemWithLength:NSVariableStatusItemLength];
         [self listenForNotifications];
         [NSBundle loadNibNamed:@"MenuView" owner:self];
         DebugLog(@"menu view is %@", self.menuView);
@@ -37,10 +37,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)addStatusItem {
     [self createMainMenu];

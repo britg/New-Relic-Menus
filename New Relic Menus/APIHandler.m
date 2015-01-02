@@ -26,11 +26,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 @synthesize responseTime;
 @synthesize applications;
 
-- (void)dealloc
-{
-    [super dealloc];
-}
-
 #pragma mark - API Key
 
 - (void)saveAPIKey:(NSString *)apiKey {

@@ -15,7 +15,7 @@
     
 }
 
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic) int appId;
 
 - (id)initWithName:(NSString *)_name appId:(int)_appId;

@@ -35,15 +35,15 @@
     NSMenuItem *apdexMenuItem;
 }
 
-@property (nonatomic, retain) IBOutlet StatsView *menuView;
-@property (nonatomic, retain) IBOutlet NSTextField *throughputLabel;
-@property (nonatomic, retain) IBOutlet NSTextField *throughputUnits;
-@property (nonatomic, retain) IBOutlet NSTextField *responseTimeLabel;
-@property (nonatomic, retain) IBOutlet NSTextField *responseTimeUnits;
-@property (nonatomic, retain) IBOutlet NSTextField *errorRateLabel;
-@property (nonatomic, retain) IBOutlet NSTextField *errorRateUnits;
-@property (nonatomic, retain) IBOutlet NSTextField *apdexLabel;
-@property (nonatomic, retain) IBOutlet NSTextField *apdexUnits;
+@property (nonatomic, strong) IBOutlet StatsView *menuView;
+@property (nonatomic, strong) IBOutlet NSTextField *throughputLabel;
+@property (nonatomic, strong) IBOutlet NSTextField *throughputUnits;
+@property (nonatomic, strong) IBOutlet NSTextField *responseTimeLabel;
+@property (nonatomic, strong) IBOutlet NSTextField *responseTimeUnits;
+@property (nonatomic, strong) IBOutlet NSTextField *errorRateLabel;
+@property (nonatomic, strong) IBOutlet NSTextField *errorRateUnits;
+@property (nonatomic, strong) IBOutlet NSTextField *apdexLabel;
+@property (nonatomic, strong) IBOutlet NSTextField *apdexUnits;
 
 - (void)listenForNotifications;
 

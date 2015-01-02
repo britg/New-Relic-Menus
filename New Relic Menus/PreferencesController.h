@@ -31,21 +31,21 @@
     
 }
 
-@property (nonatomic, retain) IBOutlet NSTextField *apiKeyLabel;
-@property (nonatomic, retain) IBOutlet NSTextField *apiKeyField;
-@property (nonatomic, retain) IBOutlet NSButton *confirmButton;
-@property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
+@property (nonatomic, strong) IBOutlet NSTextField *apiKeyLabel;
+@property (nonatomic, strong) IBOutlet NSTextField *apiKeyField;
+@property (nonatomic, strong) IBOutlet NSButton *confirmButton;
+@property (nonatomic, strong) IBOutlet NSProgressIndicator *progressIndicator;
 
-@property (nonatomic, retain) IBOutlet NSMenu *hiddenMenu;
+@property (nonatomic, strong) IBOutlet NSMenu *hiddenMenu;
 
-@property (nonatomic, retain) IBOutlet NSToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet NSTabView *tabView;
+@property (nonatomic, strong) IBOutlet NSToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet NSTabView *tabView;
 
-@property (nonatomic, retain) IBOutlet NSButton *throughputButton;
-@property (nonatomic, retain) IBOutlet NSButton *responseTimeButton;
-@property (nonatomic, retain) IBOutlet NSButton *errorButton;
-@property (nonatomic, retain) IBOutlet NSButton *apdexButton;
-@property (nonatomic, retain) IBOutlet NSButton *startupButton;
+@property (nonatomic, strong) IBOutlet NSButton *throughputButton;
+@property (nonatomic, strong) IBOutlet NSButton *responseTimeButton;
+@property (nonatomic, strong) IBOutlet NSButton *errorButton;
+@property (nonatomic, strong) IBOutlet NSButton *apdexButton;
+@property (nonatomic, strong) IBOutlet NSButton *startupButton;
 
 - (IBAction)confirmButtonPressed:(id)sender;
 

@@ -26,14 +26,6 @@
 @synthesize apdexButton;
 @synthesize startupButton;
 
-- (void)dealloc
-{
-    [apiKeyField release];
-    [confirmButton release];
-    [progressIndicator release];
-    [hiddenMenu release];
-    [super dealloc];
-}
 
 - (void)showWindow:(id)sender {
     DebugLog(@"Show window called");
@@ -166,7 +158,7 @@
     if (loginItemsRef == nil) return;
     if (on) {
         // Add the app to the LoginItems list.
-        CFURLRef appUrl = (CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
         LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
         if (itemRef) CFRelease(itemRef);
     }
@@ -243,7 +235,7 @@
 
 - (LSSharedFileListItemRef)itemRefInLoginItems {
     LSSharedFileListItemRef itemRef = nil;
-    NSURL *itemUrl = nil;
+    CFURLRef *itemUrl = NULL;
     
     // Get the app's URL.
     NSURL *appUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
@@ -251,13 +243,13 @@
     LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
     if (loginItemsRef == nil) return nil;
     // Iterate over the LoginItems.
-    NSArray *loginItems = (NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, nil);
+    NSArray *loginItems = (NSArray *)CFBridgingRelease(LSSharedFileListCopySnapshot(loginItemsRef, nil));
     for (int currentIndex = 0; currentIndex < [loginItems count]; currentIndex++) {
         // Get the current LoginItem and resolve its URL.
-        LSSharedFileListItemRef currentItemRef = (LSSharedFileListItemRef)[loginItems objectAtIndex:currentIndex];
-        if (LSSharedFileListItemResolve(currentItemRef, 0, (CFURLRef *) &itemUrl, NULL) == noErr) {
+        LSSharedFileListItemRef currentItemRef = (__bridge LSSharedFileListItemRef)[loginItems objectAtIndex:currentIndex];
+        if (LSSharedFileListItemResolve(currentItemRef, 0, itemUrl, NULL) == noErr) {
             // Compare the URLs for the current LoginItem and the app.
-            if ([itemUrl isEqual:appUrl]) {
+            if (itemUrl != NULL && [(__bridge NSURL *)*itemUrl isEqual:appUrl]) {
                 // Save the LoginItem reference.
                 itemRef = currentItemRef;
             }
@@ -266,7 +258,6 @@
     // Retain the LoginItem reference.
     if (itemRef != nil) CFRetain(itemRef);
     // Release the LoginItems lists.
-    [loginItems release];
     CFRelease(loginItemsRef);
     
     return itemRef;
