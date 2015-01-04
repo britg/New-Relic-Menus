@@ -1,1 +1,3 @@
 platform :osx
+
+pod 'KSReachability'

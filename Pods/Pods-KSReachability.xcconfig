@@ -1,0 +1,1 @@
+PODS_KSREACHABILITY_OTHER_LDFLAGS = -framework Foundation -framework SystemConfiguration

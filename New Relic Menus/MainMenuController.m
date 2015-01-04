@@ -10,6 +10,11 @@
 #import "APIHandler.h"
 #import "NRMApplication.h"
 #import "NRMAccount.h"
+#import <KSReachability/KSReachability.h>
+
+@interface MainMenuController()
+@property (nonatomic, strong) KSReachability *reachability;
+@end
 
 @implementation MainMenuController
 
@@ -40,7 +45,6 @@
 
 - (void)addStatusItem {
     [self createMainMenu];
-    [self coldStart];
 }
 
 - (void)createMainMenu {
@@ -125,6 +129,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(adjustLayout) 
                                                  name:DISPLAY_PREFERENCES_UPDATED
+                                               object:nil];
+
+    self.reachability = [KSReachability reachabilityToHost:RPM_DOMAIN];
+    self.reachability.notificationName = @"kNewRelicReachabilityNotification";
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onReachabilityChanged:)
+                                                 name:self.reachability.notificationName
                                                object:nil];
 }
 
@@ -306,6 +317,7 @@
 }
 
 - (void)beginTimer {
+    [timer invalidate];
     timer = [NSTimer scheduledTimerWithTimeInterval: 60
 											 target: self
 										   selector: @selector(refresh)
@@ -343,6 +355,16 @@
 - (void)setCurrentAccount:(NSMenuItem *)selectedMenuItem {
     NRMAccount *account = [selectedMenuItem representedObject];
     [[APIHandler sharedInstance] setAccount:account.accountId];
+}
+
+- (void)onReachabilityChanged:(NSNotification *)notification {
+    KSReachability* reachability = (KSReachability*)notification.object;
+    if (reachability.reachable) {
+        [self coldStart];
+    } else {
+        [mainStatusItem setView:nil];
+        [self setStateLoading];
+    }
 }
 
 @end
