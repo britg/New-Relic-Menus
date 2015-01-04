@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A7DD6D32-1904-4915-83DE-E982D1F71383</string>
+	<key>IDESourceControlProjectName</key>
+	<string>New Relic Menu Bars</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9F4622E2CE4370F5A502D3ED4FB4732A276EB085</key>
+		<string>github.com:wanelo/New-Relic-Menus.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>New Relic Menu Bars.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9F4622E2CE4370F5A502D3ED4FB4732A276EB085</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:wanelo/New-Relic-Menus.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9F4622E2CE4370F5A502D3ED4FB4732A276EB085</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9F4622E2CE4370F5A502D3ED4FB4732A276EB085</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Wanelo-New-Relic-Menus</string>
+		</dict>
+	</array>
+</dict>
+</plist>
