@@ -7,6 +7,7 @@
 //
 
 #define kKeyString @"rpm_key"
+#define kKeyPreferredAppId @"preferred_app_id"
 
 // Notifications
 #define SHOW_PREFERENCES_NOTIFICATION @"show_preferences"
