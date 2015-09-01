@@ -13,7 +13,7 @@
     int accountId;
 }
 
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic) int accountId;
 
 - (id)initWithName:(NSString *)_name accountId:(int)_accountId;

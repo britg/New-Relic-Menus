@@ -1,0 +1,10 @@
+PODS:
+  - KSReachability (1.4)
+
+DEPENDENCIES:
+  - KSReachability
+
+SPEC CHECKSUMS:
+  KSReachability: 29c0ec738e487c750a0e46b6554cc50df73f60b1
+
+COCOAPODS: 0.33.1

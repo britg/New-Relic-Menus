@@ -10,13 +10,13 @@
 #import "NRMenusAppDelegate.h"
 
 int main(int argc, char *argv[]) {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [NSApplication sharedApplication];
+    @autoreleasepool {
+        [NSApplication sharedApplication];
 	
-    NRMenusAppDelegate *menu = [[NRMenusAppDelegate alloc] init];
-    [NSApp setDelegate:menu];
-    [NSApp run];
+        NRMenusAppDelegate *menu = [[NRMenusAppDelegate alloc] init];
+        [NSApp setDelegate:menu];
+        [NSApp run];
 	
-    [pool release];
+    }
     return EXIT_SUCCESS;
 }

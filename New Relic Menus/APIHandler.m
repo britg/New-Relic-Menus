@@ -26,11 +26,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
 @synthesize responseTime;
 @synthesize applications;
 
-- (void)dealloc
-{
-    [super dealloc];
-}
-
 #pragma mark - API Key
 
 - (void)saveAPIKey:(NSString *)apiKey {
@@ -188,7 +183,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
         DebugLog(@"There was an error parsing the data! %@", data);
         return;
     }
-    
+    BOOL hasStoredAppId = self.storedPreferredAppId != nil;
+
     //DebugLog(@"Application response XML is %@", doc);
     
     NSArray *appNodes = [doc nodesForXPath:@"//application" error:&error];
@@ -204,11 +200,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
             NSXMLElement *attribute = [[firstAppNode children] objectAtIndex:j];
             DebugLog(@"The current attribute is %@", attribute);
             if ([@"id" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-                if (i == 0) {
+                if (!hasStoredAppId && i == 0) {
                     primaryApplicationId = [[attribute stringValue] intValue];
                 }
                 
                 app.appId = [[attribute stringValue] intValue];
+
+                if (app.appId == self.storedPreferredAppId.integerValue) {
+                    primaryApplicationId = app.appId;
+                }
             }
             
             if ([@"name" compare:[attribute name] options:NSCaseInsensitiveSearch] == NSOrderedSame) {
@@ -218,6 +218,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
         
         
         [self.applications addObject:app];
+    }
+    if (primaryApplicationId == 0) {
+        primaryApplicationId = [self.applications.firstObject appId];
     }
     
     DebugLog(@"Primary application id is %i", primaryApplicationId);
@@ -311,10 +314,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(APIHandler);
         NRMApplication *app = [applications objectAtIndex:i];
         if (appId == app.appId) {
             self.currentApplication = app;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:@(app.appId)
+                         forKey:kKeyPreferredAppId];
+            [defaults synchronize];
             break;
         }
     }
     [self getPrimaryMetrics];
+}
+
+- (NSNumber *)storedPreferredAppId {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kKeyPreferredAppId];
 }
 
 @end
